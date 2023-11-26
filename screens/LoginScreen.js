@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   createUserWithEmailAndPassword,
@@ -28,7 +28,7 @@ const LoginScreen = () => {
           setDoc(doc(db, "users", `${email}`), {
             workouts: [],
           });
-          navigation.navigate("Home");
+          navigation.navigate("Main");
         })
         .catch((error) => alert(error.message));
     } catch (error) {
@@ -39,7 +39,7 @@ const LoginScreen = () => {
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        navigation.navigate("Home");
+        navigation.navigate("Main");
       })
       .catch((error) => alert(error.message));
   };
