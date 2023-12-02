@@ -8,27 +8,28 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const LoginScreen = () => {
+const SignupScreen = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
 	const navigation = useNavigation();
 
-	const handleLogin = () => {
-		signInWithEmailAndPassword(auth, email, password)
-			.then(() => {
-				navigation.navigate("Main");
-			})
-			.catch((error) => alert(error.message));
-	};
-
-	const toSignup = () => {
-		navigation.navigate("Signup");
+	const handleSignup = () => {
+		try {
+			createUserWithEmailAndPassword(auth, email, password).then(
+				async () => {
+					setDoc(doc(db, "users", `${email}`));
+				}
+			);
+			navigation.navigate("Main");
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	return (
@@ -55,21 +56,15 @@ const LoginScreen = () => {
 				/>
 			</View>
 			<View style={styles.buttonContainer}>
-				<TouchableOpacity onPress={handleLogin} style={styles.button}>
-					<Text style={styles.buttonText}>Login</Text>
-				</TouchableOpacity>
-			</View>
-			<View style={styles.bottomContainer}>
-				<Text style={styles.bottomText}>Don't have an account? </Text>
-				<TouchableOpacity onPress={toSignup}>
-					<Text style={styles.bottomText}>Sign Up</Text>
+				<TouchableOpacity onPress={handleSignup} style={styles.button}>
+					<Text style={styles.buttonText}>Signup</Text>
 				</TouchableOpacity>
 			</View>
 		</KeyboardAvoidingView>
 	);
 };
 
-export default LoginScreen;
+export default SignupScreen;
 
 const styles = StyleSheet.create({
 	container: {
@@ -109,7 +104,8 @@ const styles = StyleSheet.create({
 		width: "60%",
 		justifyContent: "center",
 		alignItems: "center",
-		marginTop: 40,
+		marginTop: 20,
+		marginBottom: 40,
 	},
 	button: {
 		backgroundColor: "black",
@@ -125,12 +121,5 @@ const styles = StyleSheet.create({
 		color: "white",
 		fontWeight: "700",
 		fontSize: 16,
-	},
-	bottomContainer: {
-		flexDirection: "row",
-		paddingTop: 10,
-	},
-	bottomText: {
-		color: "white",
 	},
 });
