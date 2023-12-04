@@ -14,10 +14,10 @@ const Tab = createBottomTabNavigator();
 function Main() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Search" component={SearchScreen} />
-      <Tab.Screen name="Write Review" component={WriteReviewActually} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
+      <Tab.Screen name="Search" component={SearchScreen} options={{ headerShown: false }}/>
+      <Tab.Screen name="Write Review" component={WriteReviewActually} options={{ headerShown: false }}/>
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
     </Tab.Navigator>
   );
 }

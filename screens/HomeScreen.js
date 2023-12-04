@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, FlatList, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, FlatList, StyleSheet, SafeAreaView } from 'react-native';
 
 const SquareDisplay = ({ index, text }) => (
   <View style={styles.squareDisplay}>
@@ -21,7 +21,7 @@ const HomePage = () => {
   ];
 
   return (
-    <View style={styles.homePage}>
+    <SafeAreaView style={styles.homePage}>
       <Text style={styles.notedTitle}>Noted.</Text>
       <View style={styles.line} />
 
@@ -38,7 +38,7 @@ const HomePage = () => {
           </View>
         ))}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
