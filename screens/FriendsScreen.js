@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Text, TextInput, View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
+import FriendButton from "../components/FriendsList/FriendButton";
 
 const DATA = [
   {
-    title: "Friend 1",
+    name: "Friend 3",
+    isFriend: true,
   },
   {
-    title: "Friend 2",
+    name: "Friend 2",
+    isFriend: false,
   },
 ];
 
@@ -15,7 +18,6 @@ const FriendsScreen = () => {
   const [input, setInput] = useState("");
   return (
     <View style={{ flex: 1 }}>
-      <Text>Friends</Text>
       <TextInput
         placeholder="Add or search friends"
         onChangeText={(text) => setInput(text)}
@@ -23,7 +25,7 @@ const FriendsScreen = () => {
       />
       <FlashList
         data={DATA}
-        renderItem={({ item }) => <Text>{item.title}</Text>}
+        renderItem={({ item }) => <FriendButton friend={item} />}
         estimatedItemSize={50}
       />
     </View>

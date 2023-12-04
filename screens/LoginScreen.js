@@ -12,8 +12,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth, db } from "../firebase";
+import { auth, db } from "../firebase.js";
 import { doc, setDoc } from "firebase/firestore";
+import axios from "axios";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -22,18 +23,23 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   const handleSignup = () => {
-    try {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(async () => {
-          setDoc(doc(db, "users", `${email}`), {
-            workouts: [],
-          });
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(async () => {
+        try {
+          const response = await axios.post(
+            "http://localhost:3001/user/users",
+            {
+              email: email,
+            }
+          );
           navigation.navigate("Main");
-        })
-        .catch((error) => alert(error.message));
-    } catch (error) {
-      console.error(error);
-    }
+        } catch (error) {
+          alert("Failed to create user in Firestore: " + error.message);
+        }
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
   const handleLogin = () => {
