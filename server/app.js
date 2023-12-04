@@ -7,6 +7,7 @@ const app = express();
 const port = 3001;
 
 app.use(cors());
+app.use(express.json());
 
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.CLIENT_ID,
@@ -34,6 +35,9 @@ app.get("/search", async (req, res) => {
     console.log(err);
   }
 });
+
+const UserRoutes = require("./routes/UserRoutes.js");
+app.use("/user", UserRoutes);
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
