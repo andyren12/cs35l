@@ -9,9 +9,7 @@ import {
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../firebase.js";
-import { doc, setDoc } from "firebase/firestore";
-import axios from "axios";
+import { auth } from "../firebase.js";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const LoginScreen = () => {
@@ -19,28 +17,6 @@ const LoginScreen = () => {
 	const [password, setPassword] = useState("");
 
 	const navigation = useNavigation();
-
-	const handleSignup = () => {
-		createUserWithEmailAndPassword(auth, email, password)
-			.then(async () => {
-				try {
-					const response = await axios.post(
-						"http://localhost:3001/user/users",
-						{
-							email: email,
-						}
-					);
-					navigation.navigate("Main");
-				} catch (error) {
-					alert(
-						"Failed to create user in Firestore: " + error.message
-					);
-				}
-			})
-			.catch((error) => {
-				alert(error.message);
-			});
-	};
 
 	const handleLogin = () => {
 		signInWithEmailAndPassword(auth, email, password)
@@ -143,19 +119,8 @@ const styles = StyleSheet.create({
 		borderRadius: 30,
 		alignItems: "center",
 	},
-	buttonOutline: {
-		backgroundColor: "white",
-		marginTop: 5,
-		borderColor: "#0782F9",
-		borderWidth: 2,
-	},
 	buttonText: {
 		color: "white",
-		fontWeight: "700",
-		fontSize: 16,
-	},
-	buttonOutlineText: {
-		color: "#0782F9",
 		fontWeight: "700",
 		fontSize: 16,
 	},
