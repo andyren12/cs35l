@@ -1,8 +1,12 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 
 const ProfileScreen = () => {
-
+const navigation = useNavigation();
+const toYourAlbums = () => {
+  navigation.navigate("YourAlbums");
+}
   return (
     <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
       <View style={styles.div}>
@@ -89,7 +93,9 @@ const ProfileScreen = () => {
             <View style={styles.overlap6}>
               <Text style={styles.textWrapper11}>Your Reviews</Text>
               <Text style={styles.textWrapper12}>Liked Reviews</Text>
-              <Text style={styles.textWrapper13}>Your Albums</Text>
+              <TouchableOpacity onPress={toYourAlbums}>
+                <Text style={styles.textWrapper13}>Your Albums</Text>
+              </TouchableOpacity>
               <Text style={styles.textWrapper14}>Your Lists</Text>
               <Text style={styles.textWrapper15}>Want to Listen</Text>
             </View>

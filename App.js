@@ -8,6 +8,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import SearchScreen from "./screens/SearchScreen";
 import SignupScreen from "./screens/SignupScreen";
 import WriteReviewActually from "./screens/WriteReviewActually";
+import YourAlbumsScreen from "./screens/YourAlbumsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -41,6 +42,11 @@ export default function App() {
         <Stack.Screen
           name="Main"
           component={Main}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="YourAlbums"
+          component={YourAlbumsScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
