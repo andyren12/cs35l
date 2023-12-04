@@ -6,7 +6,7 @@ const YourListsPage = () => {
         <View style={styles.rectangle} />
     );
 
-    const data = Array(5).fill(); // Create an array with 5 elements
+    const data = Array(5).fill(); 
 
     return (
         <ScrollView style={styles.container}>

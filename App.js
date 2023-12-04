@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "./screens/ProfileScreen";
 import SearchScreen from "./screens/SearchScreen";
 import SignupScreen from "./screens/SignupScreen";
-import WriteReviewActually from "./screens/WriteReviewActually";
+import WriteReviewActually, { WriteReview }, { WriteReview } from "./screens/WriteReviewActually";
 import WantToListen from "./screens/WantToListen";
 import YourAlbumsScreen from "./screens/YourAlbumsScreen";
 
@@ -16,10 +16,10 @@ const Tab = createBottomTabNavigator();
 function Main() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} options={{ headerShown: false }}/>
-      <Tab.Screen name="Search" component={SearchScreen} options={{ headerShown: false }}options={{ headerShown: false }}/>
-      <Tab.Screen name="Write Review" component={WriteReviewActually}options={{ headerShown: false }} options={{ headerShown: false }}/>
-      <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}options={{ headerShown: false }}/>
+      <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }}/>
+      <Tab.Screen name="Search" component={SearchScreen} options={{ headerShown: false }}/>
+      <Tab.Screen name="Write Review" component={WriteReviewActually}options={{ headerShown: false }}/>
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
     </Tab.Navigator>
   );
 }
