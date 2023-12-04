@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "./screens/ProfileScreen";
 import SearchScreen from "./screens/SearchScreen";
 import SignupScreen from "./screens/SignupScreen";
-import WriteReviewActually, { WriteReview }, { WriteReview } from "./screens/WriteReviewActually";
+import WriteReviewActually, { WriteReview } from "./screens/WriteReviewActually";
 import WantToListen from "./screens/WantToListen";
 import YourAlbumsScreen from "./screens/YourAlbumsScreen";
 
