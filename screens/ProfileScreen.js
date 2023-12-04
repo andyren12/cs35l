@@ -1,7 +1,14 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import WantToListenPage from "./WantToListen";
 
 const ProfileScreen = () => {
+
+const navigation = useNavigation();
+const ToWantToListenPage = () => {
+  navigation.navigate("WantToListen");
+}
 
   return (
     <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
@@ -91,7 +98,9 @@ const ProfileScreen = () => {
               <Text style={styles.textWrapper12}>Liked Reviews</Text>
               <Text style={styles.textWrapper13}>Your Albums</Text>
               <Text style={styles.textWrapper14}>Your Lists</Text>
-              <Text style={styles.textWrapper15}>Want to Listen</Text>
+              <TouchableOpacity onPress={ToWantToListenPage}>
+                <Text style={styles.textWrapper15}>Want to Listen</Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.overlap7}>
               <Text style={styles.textWrapper16}>0</Text>
