@@ -23,6 +23,7 @@ const RatingDropdown = () => {
 				<View style={styles.ratingBox}>
 					{[1, 2, 3, 4, 5].map((index) => (
 						<RatingStar
+							key={index}
 							filled={index <= rating}
 							onPress={() => handleRating(index)}
 						/>
