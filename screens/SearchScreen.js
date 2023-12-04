@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+	SafeAreaView,
 	ScrollView,
 	StyleSheet,
 	Text,
@@ -23,7 +24,7 @@ const SearchScreen = () => {
 	};
 
 	return (
-		<View>
+		<SafeAreaView>
 			<View style={styles.search}>
 				<Icon
 					style={styles.icon}
@@ -49,7 +50,7 @@ const SearchScreen = () => {
 					/>
 				))}
 			</ScrollView>
-		</View>
+		</SafeAreaView>
 	);
 };
 
