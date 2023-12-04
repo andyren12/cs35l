@@ -9,7 +9,7 @@ const navigation = useNavigation();
 const toYourAlbums = () => {
   navigation.navigate("YourAlbums");
 }
-const navigation = useNavigation();
+
 const ToWantToListenPage = () => {
   navigation.navigate("WantToListen");
 }
