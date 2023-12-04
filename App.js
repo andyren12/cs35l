@@ -10,6 +10,7 @@ import SignupScreen from "./screens/SignupScreen";
 import WriteReviewActually, { WriteReview } from "./screens/WriteReviewActually";
 import WantToListen from "./screens/WantToListen";
 import YourAlbumsScreen from "./screens/YourAlbumsScreen";
+import YourListsPage from "./screens/YourListsPage";
 
 const Tab = createBottomTabNavigator();
 
@@ -54,6 +55,11 @@ export default function App() {
         <Stack.Screen
           name="WantToListen"
           component={WantToListen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="YourLists"
+          component={YourListsPage}
           options={{ headerShown: false }}
         />
 
