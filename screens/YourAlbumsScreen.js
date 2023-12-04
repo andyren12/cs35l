@@ -1,17 +1,18 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView, FlatList } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const WantToListen = () => {
+const YourAlbumsScreen = () => {
     const renderRectangle = () => (
         <View style={styles.rectangle} />
     );
 
-    const data = Array(5).fill(); 
+    const data = Array(5).fill(); // Create an array with 5 elements
 
     return (
 		<ScrollView style={styles.container}>
 			<View style={styles.header}>
-				<Text style={styles.headerText}>Want to Listen</Text>
+				<Text style={styles.headerText}>Albums</Text>
 			</View>
         
             <View style={styles.div}>
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     rectangle: {
-        backgroundColor: 'blue',
+        backgroundColor: "darkgray",
         height: 60,
         width: 60,
         marginRight: 5,
@@ -291,4 +292,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default WantToListen;
+export default YourAlbumsScreen;

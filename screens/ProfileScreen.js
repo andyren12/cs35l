@@ -1,10 +1,14 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import WantToListenPage from "./WantToListen";
 
 const ProfileScreen = () => {
-
+const navigation = useNavigation();
+const toYourAlbums = () => {
+  navigation.navigate("YourAlbums");
+}
 const navigation = useNavigation();
 const ToWantToListenPage = () => {
   navigation.navigate("WantToListen");
@@ -96,7 +100,9 @@ const ToWantToListenPage = () => {
             <View style={styles.overlap6}>
               <Text style={styles.textWrapper11}>Your Reviews</Text>
               <Text style={styles.textWrapper12}>Liked Reviews</Text>
-              <Text style={styles.textWrapper13}>Your Albums</Text>
+              <TouchableOpacity onPress={toYourAlbums}>
+                <Text style={styles.textWrapper13}>Your Albums</Text>
+              </TouchableOpacity>
               <Text style={styles.textWrapper14}>Your Lists</Text>
               <TouchableOpacity onPress={ToWantToListenPage}>
                 <Text style={styles.textWrapper15}>Want to Listen</Text>
