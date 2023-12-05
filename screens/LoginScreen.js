@@ -73,7 +73,6 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "black",
@@ -129,7 +128,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingTop: 10,
   },
-  bottomText: {
-    color: "white",
+  bottomContainer: {
+    flexDirection: "row",
+    paddingTop: 10,
   },
 });

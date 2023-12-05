@@ -1,5 +1,6 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
+import RatingDropdown from "./RatingDropdown";
 import { useNavigation } from "@react-navigation/native";
 
 const Album = ({ id, name, image, artist, year }) => {
@@ -9,11 +10,14 @@ const Album = ({ id, name, image, artist, year }) => {
   };
   return (
     <TouchableOpacity style={styles.container} onPress={toAlbum}>
-      <Image style={styles.albumImage} source={{ uri: image }} />
-      <View style={styles.text}>
-        <Text>{name}</Text>
-        <Text style={styles.artist}>{artist}</Text>
+      <View style={styles.albumInfo}>
+        <Image style={styles.albumImage} source={{ uri: image }} />
+        <View style={styles.text}>
+          <Text>{name}</Text>
+          <Text style={styles.artist}>{artist}</Text>
+        </View>
       </View>
+      <RatingDropdown />
     </TouchableOpacity>
   );
 };
@@ -22,6 +26,11 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     padding: 10,
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  albumInfo: {
+    flexDirection: "row",
   },
   albumImage: {
     marginRight: 10,
