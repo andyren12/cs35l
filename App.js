@@ -1,4 +1,4 @@
-import { app } from "./firebase";
+import { app } from "./firebase.js";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "./screens/LoginScreen";
@@ -6,6 +6,8 @@ import HomeScreen from "./screens/HomeScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "./screens/ProfileScreen";
 import SearchScreen from "./screens/SearchScreen";
+import FriendsScreen from "./screens/FriendsScreen";
+import { UserProvider } from "./UserContext.js";
 import SignupScreen from "./screens/SignupScreen";
 import WriteReviewActually from "./screens/WriteReviewActually";
 import AlbumDetailsScreen from "./screens/AlbumDetailsScreen";
