@@ -10,35 +10,41 @@ app.use(cors());
 app.use(express.json());
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
+	clientId: process.env.CLIENT_ID,
+	clientSecret: process.env.CLIENT_SECRET,
 });
 
 const authenticateSpotify = async () => {
-  try {
-    const data = await spotifyApi.clientCredentialsGrant();
-    console.log("The access token is " + data.body["access_token"]);
-    spotifyApi.setAccessToken(data.body["access_token"]);
-  } catch (err) {
-    console.error("Something went wrong when retrieving an access token", err);
-  }
+	try {
+		const data = await spotifyApi.clientCredentialsGrant();
+		console.log("The access token is " + data.body["access_token"]);
+		spotifyApi.setAccessToken(data.body["access_token"]);
+	} catch (err) {
+		console.error(
+			"Something went wrong when retrieving an access token",
+			err
+		);
+	}
 };
 
 authenticateSpotify();
 
 app.get("/search", async (req, res) => {
-  try {
-    const { query } = req.query;
-    const result = await spotifyApi.searchAlbums(query);
-    res.json(result.body);
-  } catch (err) {
-    console.log(err);
-  }
+	try {
+		const { query } = req.query;
+		const result = await spotifyApi.searchAlbums(query);
+		res.json(result.body);
+	} catch (err) {
+		console.log(err);
+	}
 });
 
 const UserRoutes = require("./routes/UserRoutes.js");
+const MusicRoutes = require("./routes/MusicRoutes.js");
+
 app.use("/user", UserRoutes);
+app.use("/music", MusicRoutes);
 
 app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`);
+	console.log(`Listening at http://localhost:${port}`);
 });
