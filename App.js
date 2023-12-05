@@ -6,6 +6,8 @@ import HomeScreen from "./screens/HomeScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "./screens/ProfileScreen";
 import SearchScreen from "./screens/SearchScreen";
+import FriendsScreen from "./screens/FriendsScreen";
+import { UserProvider } from "./UserContext.js";
 import SignupScreen from "./screens/SignupScreen";
 import WriteReviewActually, {
   WriteReview,
@@ -41,7 +43,6 @@ function Main() {
         component={ProfileScreen}
         options={{ headerShown: false }}
       />
-      <Tab.Screen name="Friends" component={FriendsScreen} />
     </Tab.Navigator>
   );
 }

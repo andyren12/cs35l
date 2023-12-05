@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 import {
   KeyboardAvoidingView,
   StyleSheet,
