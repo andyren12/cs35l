@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import {
 	ScrollView,
+	SafeAreaView,
 	StyleSheet,
-	Text,
 	TextInput,
-	TouchableOpacity,
 	View,
 } from "react-native";
 import axios from "axios";
@@ -23,7 +22,7 @@ const SearchScreen = () => {
 	};
 
 	return (
-		<View>
+		<SafeAreaView>
 			<View style={styles.search}>
 				<Icon
 					style={styles.icon}
@@ -47,10 +46,11 @@ const SearchScreen = () => {
 						name={album.name}
 						image={album.images[0].url}
 						artist={album.artists[0].name}
+						year={album.release_date.substring(0, 4)}
 					/>
 				))}
 			</ScrollView>
-		</View>
+		</SafeAreaView>
 	);
 };
 
