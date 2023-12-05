@@ -1,15 +1,20 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
-const Album = ({ name, image, artist }) => {
+const Album = ({ id, name, image, artist, year }) => {
+  const navigation = useNavigation();
+  const toAlbum = () => {
+    navigation.navigate("AlbumDetails", { id, name, image, artist, year });
+  };
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={toAlbum}>
       <Image style={styles.albumImage} source={{ uri: image }} />
       <View style={styles.text}>
         <Text>{name}</Text>
         <Text style={styles.artist}>{artist}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
