@@ -1,9 +1,7 @@
-import { auth, db } from "../firebase";
+import { auth } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -13,6 +11,7 @@ import {
   Text,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import axios from "axios";
 
 const SignupScreen = () => {
   const [email, setEmail] = useState("");
@@ -29,17 +28,14 @@ const SignupScreen = () => {
       .then(async (userCredential) => {
         try {
           const userId = userCredential.user.uid;
-          const response = await axios.post(
-            "http://localhost:3001/user/users",
-            {
-              email: email,
-              userId: userId,
-            }
-          );
+          await axios.post("http://localhost:3001/user/create", {
+            email: email,
+            userId: userId,
+          });
           navigation.navigate("Main");
         } catch (error) {
           alert("Failed to create user in Firestore: " + error.message);
-          console.error(error);
+          console.log(error);
         }
       })
       .catch((error) => {

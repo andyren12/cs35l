@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text, TextInput, View } from "react-native";
+import { TextInput, View } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import FriendButton from "../components/FriendsList/FriendButton";
 

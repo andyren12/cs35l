@@ -37,7 +37,10 @@ app.get("/search", async (req, res) => {
 });
 
 const UserRoutes = require("./routes/UserRoutes.js");
+const MusicRoutes = require("./routes/MusicRoutes.js");
+
 app.use("/user", UserRoutes);
+app.use("/music", MusicRoutes);
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);

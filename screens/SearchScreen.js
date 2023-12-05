@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  SafeAreaView,
   ScrollView,
+  SafeAreaView,
   StyleSheet,
   TextInput,
   TouchableOpacity,

@@ -14,8 +14,8 @@ const FriendButton = ({ friend }) => {
     }
 
     const apiEndpoint = friend.isFriend
-      ? "http://localhost:3001/user/removeFriend"
-      : "http://localhost:3001/user/addFriend";
+      ? "http://localhost:3001/user/remove/friend"
+      : "http://localhost:3001/user/add/friend";
 
     try {
       console.log(friend.friendId);

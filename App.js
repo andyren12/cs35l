@@ -1,8 +1,6 @@
 import { app } from "./firebase.js";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "./screens/LoginScreen";
-import HomeScreen from "./screens/HomeScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "./screens/ProfileScreen";
 import SearchScreen from "./screens/SearchScreen";
@@ -14,6 +12,8 @@ import YourAlbumsScreen from "./screens/YourAlbumsScreen";
 import YourListsPage from "./screens/YourListsPage";
 import FriendsScreen from "./screens/FriendsScreen";
 import AlbumDetailsScreen from "./screens/AlbumDetailsScreen.js";
+import HomeScreen from "./screens/HomeScreen.js";
+import LoginScreen from "./screens/LoginScreen.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -51,23 +51,6 @@ function Main() {
 
 const Stack = createNativeStackNavigator();
 
-const AuthStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Signup"
-        component={SignupScreen}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
-  );
-};
-
 export default function App() {
   return (
     <UserProvider>
@@ -83,7 +66,6 @@ export default function App() {
             component={SignupScreen}
             options={{ headerShown: false }}
           />
-          {/* Main app */}
           <Stack.Screen
             name="Main"
             component={Main}
