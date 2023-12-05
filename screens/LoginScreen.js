@@ -132,4 +132,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingTop: 10,
   },
+  bottomText: {
+    color: "white",
+  },
 });
