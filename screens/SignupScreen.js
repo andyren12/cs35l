@@ -13,7 +13,6 @@ import {
   Text,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import axios from "axios";
 
 const SignupScreen = () => {
   const [email, setEmail] = useState("");

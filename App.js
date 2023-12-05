@@ -6,17 +6,14 @@ import HomeScreen from "./screens/HomeScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "./screens/ProfileScreen";
 import SearchScreen from "./screens/SearchScreen";
-import FriendsScreen from "./screens/FriendsScreen";
 import { UserProvider } from "./UserContext.js";
 import SignupScreen from "./screens/SignupScreen";
-import WriteReviewActually, {
-  WriteReview,
-} from "./screens/WriteReviewActually";
+import WriteReviewActually from "./screens/WriteReviewActually";
 import WantToListen from "./screens/WantToListen";
 import YourAlbumsScreen from "./screens/YourAlbumsScreen";
 import YourListsPage from "./screens/YourListsPage";
 import FriendsScreen from "./screens/FriendsScreen";
-import { UserProvider } from "./UserContext.js";
+import AlbumDetailsScreen from "./screens/AlbumDetailsScreen.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -41,6 +38,11 @@ function Main() {
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Friends"
+        component={FriendsScreen}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>
@@ -83,6 +85,11 @@ export default function App() {
           <Stack.Screen
             name="YourLists"
             component={YourListsPage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AlbumDetails"
+            component={AlbumDetailsScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
