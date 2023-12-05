@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Pressable, Text, View, StyleSheet } from "react-native";
 import { useCurrentUser } from "../../UserContext";
 import axios from "axios";
@@ -7,33 +7,76 @@ const FriendButton = ({ friend }) => {
   const currentUser = useCurrentUser();
   const userId = currentUser ? currentUser.uid : "No user";
 
+  const [friendDetails, setFriendDetails] = useState(null);
+  const [isFriend, setIsFriend] = useState(false);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      if (friend) {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/user/getUser?userId=${friend}`
+          );
+          setFriendDetails(response.data);
+        } catch (error) {
+          console.error("Error fetching user details:", error);
+        }
+      }
+    };
+    fetchUserDetails();
+  }, [friend]);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      if (userId && friend) {
+        try {
+          const checkFriendResponse = await axios.get(
+            `http://localhost:3001/user/checkFriend?userId=${userId}&friendId=${friend}`
+          );
+          setIsFriend(checkFriendResponse.data.isFriend);
+        } catch (error) {
+          console.error("Error checking friend status:", error);
+        }
+      }
+    };
+
+    fetchUserDetails();
+  }, [friend]);
+
   const handlePress = async () => {
     if (!userId) {
       console.log("No user ID found");
       return;
     }
 
-    const apiEndpoint = friend.isFriend
+    const apiEndpoint = isFriend
       ? "http://localhost:3001/user/removeFriend"
       : "http://localhost:3001/user/addFriend";
 
     try {
-      console.log(friend.friendId);
       const response = axios.post(apiEndpoint, {
         userId: userId,
-        friendId: friend.friendId,
+        friendId: friend,
       });
-      console.log(response.data);
+      setIsFriend(!isFriend);
     } catch (error) {
       console.error(error.response ? error.response.data : error.message);
     }
   };
 
+  if (!friendDetails) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <Text>{friend.name}</Text>
+      <Text>{friendDetails.email}</Text>
       <Pressable onPress={handlePress}>
-        {friend.isFriend ? <Text>Remove Friend</Text> : <Text>Add Friend</Text>}
+        {isFriend ? <Text>Remove Friend</Text> : <Text>Add Friend</Text>}
       </Pressable>
     </View>
   );
