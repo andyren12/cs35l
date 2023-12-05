@@ -8,8 +8,13 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth, db } from "../firebase.js";
+import { doc, setDoc } from "firebase/firestore";
+import axios from "axios";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const LoginScreen = () => {

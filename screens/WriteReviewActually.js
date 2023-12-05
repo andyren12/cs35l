@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
 
 export const WriteReview = () => {
   return (
-    <View style={styles.writeReview}>
+    <SafeAreaView style={styles.writeReview}>
       <View style={styles.overlap}>
         <Text style={styles.textWrapper}>Add a Review</Text>
       </View>
@@ -31,8 +31,9 @@ export const WriteReview = () => {
           <Text style={styles.textWrapper8}>ALBUM COVER</Text>
         </View>
       </View>
+
       <View style={styles.rectangle7} />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '700',
     position: 'absolute',
-    top: 145,
+    top: 175,
     left: '32.5%',
   },
   textWrapper3: {
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '700',
     position: 'absolute',
-    top: 178,
+    top: 208,
     left: 40,
   },
   textWrapper4: {
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '700',
     position: 'absolute',
-    top: 213,
+    top: 243,
     left: 39,
   },
   overlap2: {
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '700',
     position: 'absolute',
-    top: 0,
+    top: 30,
     left: '-15%',
   },
   textWrapper6: {
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
     fontSize: 8,
     fontWeight: '500',
     position: 'absolute',
-    top: 15,
+    top: 45,
     left: '-15%',
   },
   overlap3: {
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
     height: 34,
     width: 138,
     position: 'absolute',
-    top: 461,
+    top: 491,
     alignSelf: 'center',
   },
   rectangle6: {
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
     height: 73,
     width: 75,
     position: 'absolute',
-    top: 83,
+    top: 113,
     left: 38,
   },
   divWrapper: {
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
     height: 165,
     width: 315,
     position: 'absolute',
-    top: 232,
+    top: 262,
     left: 38,
   },
   img: {
