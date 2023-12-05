@@ -90,7 +90,25 @@ const changeRating = async (req, res) => {
     });
   }
 };
+
+const getAlbumRatings = async (req, res) => {
+  const { id } = req.query;
+  const albumDocRef = doc(db, "albums", id);
+  try {
+    const docSnap = await getDoc(albumDocRef);
+
+    if (docSnap.exists()) {
+      res.json(docSnap.data());
+    } else {
+      res.json("No such document!");
+    }
+  } catch (error) {
+    console.error("Error fetching document: ", error);
+  }
+};
+
 module.exports = {
   addAlbum,
   changeRating,
+  getAlbumRatings,
 };
