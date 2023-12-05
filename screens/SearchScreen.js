@@ -16,7 +16,7 @@ import FriendButton from "../components/FriendsList/FriendButton";
 const SearchScreen = () => {
   const [input, setInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [searchMode, setSearchMode] = useState("songs");
+  const [searchMode, setSearchMode] = useState("albums");
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
@@ -31,7 +31,7 @@ const SearchScreen = () => {
   }, [input]);
 
   const handleSubmit = async () => {
-    if (searchMode === "songs") {
+    if (searchMode === "albums") {
       const res = await axios.get("http://localhost:3001/search", {
         params: { query: input },
       });
@@ -66,12 +66,12 @@ const SearchScreen = () => {
       <View style={styles.switchButtonContainer}>
         <TouchableOpacity
           onPress={() =>
-            setSearchMode(searchMode === "songs" ? "friends" : "songs")
+            setSearchMode(searchMode === "albums" ? "friends" : "albums")
           }
           style={styles.switchButton}
         >
           <Text>
-            {searchMode === "songs" ? "Switch to Friends" : "Switch to Songs"}
+            {searchMode === "albums" ? "Switch to Friends" : "Switch to Albums"}
           </Text>
         </TouchableOpacity>
       </View>
