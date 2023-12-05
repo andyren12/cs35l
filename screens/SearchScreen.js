@@ -4,15 +4,18 @@ import {
   ScrollView,
   StyleSheet,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import axios from "axios";
 import Album from "../components/Album";
 import Icon from "react-native-vector-icons/FontAwesome";
+import AlbumDetailsScreen from "./AlbumDetailsScreen";
 
 const SearchScreen = () => {
   const [input, setInput] = useState();
   const [albums, setAlbums] = useState([]);
+  const [selected, setSelected] = useState(null);
 
   const handleSubmit = async () => {
     const res = await axios.get("http://localhost:3001/search", {
@@ -21,8 +24,21 @@ const SearchScreen = () => {
     setAlbums(res.data.albums.items);
   };
 
+  if (selected) {
+    return (
+      <AlbumDetailsScreen
+        id={selected.id}
+        name={selected.name}
+        image={selected.images[0].url}
+        artist={selected.artists[0].name}
+        year={selected.release_date.substring(0, 4)}
+        onBack={() => setSelected(null)}
+      />
+    );
+  }
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <View style={styles.search}>
         <Icon
           style={styles.icon}
@@ -40,14 +56,19 @@ const SearchScreen = () => {
       </View>
       <ScrollView>
         {albums.map((album, index) => (
-          <Album
+          <TouchableOpacity
+            style={styles.album}
             key={index}
-            id={album.id}
-            name={album.name}
-            image={album.images[0].url}
-            artist={album.artists[0].name}
-            year={album.release_date.substring(0, 4)}
-          />
+            onPress={() => setSelected(album)}
+          >
+            <Album
+              id={album.id}
+              name={album.name}
+              image={album.images[0].url}
+              artist={album.artists[0].name}
+              year={album.release_date.substring(0, 4)}
+            />
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </SafeAreaView>
@@ -55,10 +76,14 @@ const SearchScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "black",
+    height: "100%",
+  },
   search: {
     flexDirection: "row",
     backgroundColor: "lightgray",
-    margin: 10,
+    margin: 20,
     padding: 10,
     borderRadius: 20,
   },

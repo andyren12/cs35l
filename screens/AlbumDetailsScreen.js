@@ -1,5 +1,8 @@
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { BarChart } from "react-native-chart-kit";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const MyBarChart = () => {
   const data = {
@@ -39,13 +42,17 @@ const MyBarChart = () => {
   );
 };
 
-const AlbumDetailsScreen = ({ route }) => {
-  const { id, name, image, artist, year } = route.params;
-
-  const getRating = () => {};
+const AlbumDetailsScreen = ({ id, name, image, artist, year, onBack }) => {
+  const navigation = useNavigation();
+  const getAlbumRatings = async () => {
+    const res = await axios.get("http://localhost:3001/getAlbumRatings", {
+      params: { id },
+    });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
+      <Icon name="chevron-left" size={16} color="white" onPress={onBack} />
       <View style={styles.albumInfo}>
         <View style={styles.textContainer}>
           <Text style={styles.name}>
@@ -70,7 +77,6 @@ export default AlbumDetailsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 40,
     backgroundColor: "black",
     height: "100%",
     gap: 20,
@@ -78,7 +84,7 @@ const styles = StyleSheet.create({
   albumInfo: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 20,
+    paddingHorizontal: 20,
   },
   textContainer: {
     width: "70%",

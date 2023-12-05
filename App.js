@@ -51,6 +51,23 @@ function Main() {
 
 const Stack = createNativeStackNavigator();
 
+const AuthStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Signup"
+        component={SignupScreen}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 export default function App() {
   return (
     <UserProvider>
@@ -66,6 +83,7 @@ export default function App() {
             component={SignupScreen}
             options={{ headerShown: false }}
           />
+          {/* Main app */}
           <Stack.Screen
             name="Main"
             component={Main}
