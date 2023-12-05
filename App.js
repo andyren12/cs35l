@@ -15,6 +15,9 @@ import YourAlbumsScreen from "./screens/YourAlbumsScreen";
 import YourListsPage from "./screens/YourListsPage";
 import FriendsScreen from "./screens/FriendsScreen";
 import { UserProvider } from "./UserContext.js";
+import UserProfileScreen from "./screens/UserProfileScreen.js";
+import FollowingPage from "./screens/FollowingPage.js";
+import FollowersPage from "./screens/FollowersPage.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +41,7 @@ function Main() {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={UserProfileScreen}
         options={{ headerShown: false }}
       />
       <Tab.Screen name="Friends" component={FriendsScreen} />
@@ -83,6 +86,16 @@ export default function App() {
             name="YourLists"
             component={YourListsPage}
             options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="FollowersPage"
+            component={FollowersPage}
+            options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="FollowingPage"
+            component={FollowingPage}
+            options={{ headerShown: true }}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -42,8 +42,12 @@ const addFriend = async (req, res) => {
   try {
     const { userId, friendId } = req.body;
     const userRef = doc(db, "users", userId);
+    const friendRef = doc(db, "users", friendId);
     await updateDoc(userRef, {
-      friends: arrayUnion(friendId),
+      following: arrayUnion(friendId),
+    });
+    await updateDoc(friendRef, {
+      followers: arrayUnion(userId),
     });
     res.status(200).send("Friend added successfully.");
   } catch (error) {
@@ -56,8 +60,12 @@ const removeFriend = async (req, res) => {
   try {
     const { userId, friendId } = req.body;
     const userRef = doc(db, "users", userId);
+    const friendRef = doc(db, "users", friendId);
     await updateDoc(userRef, {
-      friends: arrayRemove(friendId),
+      following: arrayRemove(friendId),
+    });
+    await updateDoc(friendRef, {
+      followers: arrayRemove(userId),
     });
     res.status(200).send("Friend removed successfully.");
   } catch (error) {
@@ -85,20 +93,43 @@ const getUser = async (req, res) => {
   }
 };
 
-const getFriends = async (req, res) => {
+const getFollowing = async (req, res) => {
   try {
     const { userId } = req.query;
-
     const userRef = doc(db, "users", userId);
     const userSnap = await getDoc(userRef);
 
+    if (!userSnap.exists()) {
+      return res.status(404).send("User not found");
+    }
+
     const userData = userSnap.data();
-    const friendsIds = userData.friends || [];
+    const friendsIds = userData.following || [];
 
     res.status(200).json(friendsIds);
   } catch (error) {
-    console.error("Error getting friends: ", error);
-    res.status(500).send("Error getting friends.");
+    console.error("Error getting following: ", error);
+    res.status(500).send("Error getting following.");
+  }
+};
+
+const getFollowers = async (req, res) => {
+  try {
+    const { userId } = req.query;
+    const userRef = doc(db, "users", userId);
+    const userSnap = await getDoc(userRef);
+
+    if (!userSnap.exists()) {
+      return res.status(404).send("User not found");
+    }
+
+    const userData = userSnap.data();
+    const friendsIds = userData.followers || [];
+
+    res.status(200).json(friendsIds);
+  } catch (error) {
+    console.error("Error getting following: ", error);
+    res.status(500).send("Error getting following.");
   }
 };
 
@@ -138,7 +169,8 @@ const checkFriend = async (req, res) => {
     }
 
     const userData = userSnap.data();
-    const isFriend = userData.friends && userData.friends.includes(friendId);
+    const isFriend =
+      userData.following && userData.following.includes(friendId);
 
     res.status(200).json({ isFriend });
   } catch (error) {
@@ -151,7 +183,8 @@ module.exports = {
   createUser,
   addFriend,
   removeFriend,
-  getFriends,
+  getFollowing,
+  getFollowers,
   getUser,
   searchUsers,
   checkFriend,
