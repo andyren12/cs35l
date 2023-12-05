@@ -38,19 +38,33 @@ const addAlbum = async (req, res) => {
 
 const changeRating = async (req, res) => {
 	try {
-		const { albumId, rating, email } = req.body;
+		const { albumId, rating, email, userId } = req.body;
 		const albumDocRef = doc(db, "albums", albumId);
+		const userDocRef = doc(db, "users", userId);
 		if (rating != 0) {
 			ratingArray = rating.toString();
-			updateData = {
+
+			//update the album's stats
+			updateAlbumData = {
 				1: arrayRemove(email),
 				2: arrayRemove(email),
 				3: arrayRemove(email),
 				4: arrayRemove(email),
 				5: arrayRemove(email),
 			};
-			updateData[ratingArray] = arrayUnion(email);
-			await updateDoc(albumDocRef, updateData);
+			updateAlbumData[ratingArray] = arrayUnion(email);
+			await updateDoc(albumDocRef, updateAlbumData);
+
+			//update user's albums
+			updateUserData = {
+				["albumList.1"]: arrayRemove(albumId),
+				["albumList.2"]: arrayRemove(albumId),
+				["albumList.3"]: arrayRemove(albumId),
+				["albumList.4"]: arrayRemove(albumId),
+				["albumList.5"]: arrayRemove(albumId),
+			};
+			updateUserData[`albumList.${ratingArray}`] = arrayUnion(albumId);
+			await updateDoc(userDocRef, updateUserData);
 		} else {
 			await updateDoc(albumDocRef, {
 				1: arrayRemove(email),
@@ -58,6 +72,13 @@ const changeRating = async (req, res) => {
 				3: arrayRemove(email),
 				4: arrayRemove(email),
 				5: arrayRemove(email),
+			});
+			await updateDoc(userDocRef, {
+				["albumList.1"]: arrayRemove(albumId),
+				["albumList.2"]: arrayRemove(albumId),
+				["albumList.3"]: arrayRemove(albumId),
+				["albumList.4"]: arrayRemove(albumId),
+				["albumList.5"]: arrayRemove(albumId),
 			});
 		}
 		res.status(200).json({

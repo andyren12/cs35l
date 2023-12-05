@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { getAuth } from "firebase/auth";
+import { useCurrentUser } from "../UserContext";
 import axios from "axios";
 import Icon from "react-native-vector-icons/Ionicons";
 import RatingStar from "./RatingStar";
@@ -10,6 +11,8 @@ const RatingDropdown = ({ albumId }) => {
 	const [rating, setRating] = useState();
 	const [email, setEmail] = useState();
 	const isInitialRender = useRef(true);
+	const currentUser = useCurrentUser();
+	const userId = currentUser ? currentUser.uid : "No user";
 
 	useEffect(() => {
 		const auth = getAuth();
@@ -33,6 +36,7 @@ const RatingDropdown = ({ albumId }) => {
 				albumId: albumId,
 				rating: rating,
 				email: email,
+				userId: userId,
 			});
 		} catch (error) {
 			console.log(error.message);

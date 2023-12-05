@@ -15,8 +15,16 @@ const createUser = async (req, res) => {
 		const { email, userId } = req.body;
 		const userRef = doc(db, "users", userId);
 
+		let albumList = {
+			1: [],
+			2: [],
+			3: [],
+			4: [],
+			5: [],
+		};
 		await setDoc(userRef, {
 			email: email,
+			albumList: albumList,
 		});
 
 		res.status(201).json({
