@@ -1,13 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const {
-  createUser,
-  addFriend,
-  removeFriend,
-} = require("../controllers/UserController.js");
+const UserController = require("../controllers/UserController.js");
 
-router.post("/users", createUser);
-router.post("/addFriend", addFriend);
-router.post("/removeFriend", removeFriend);
+router.post("/create", UserController.createUser);
+router.post("/add/friend", UserController.addFriend);
+router.post("remove/friend", UserController.removeFriend);
 
 module.exports = router;
