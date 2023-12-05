@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Pressable, Text, View, StyleSheet } from "react-native";
 import { useCurrentUser } from "../../UserContext";
+import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
 const FriendButton = ({ friend }) => {
   const currentUser = useCurrentUser();
   const userId = currentUser ? currentUser.uid : "No user";
+
+  const navigation = useNavigation();
 
   const [friendDetails, setFriendDetails] = useState(null);
   const [isFriend, setIsFriend] = useState(false);
@@ -27,7 +30,7 @@ const FriendButton = ({ friend }) => {
   }, [friend]);
 
   useEffect(() => {
-    const fetchUserDetails = async () => {
+    const fetchUserFriendDetails = async () => {
       if (userId && friend) {
         try {
           const checkFriendResponse = await axios.get(
@@ -40,7 +43,7 @@ const FriendButton = ({ friend }) => {
       }
     };
 
-    fetchUserDetails();
+    fetchUserFriendDetails();
   }, [friend]);
 
   const handlePress = async () => {
@@ -72,9 +75,15 @@ const FriendButton = ({ friend }) => {
     );
   }
 
+  const navigateToProfile = () => {
+    navigation.navigate("UserProfileScreen", { userId: friend });
+  };
+
   return (
     <View style={styles.container}>
-      <Text>{friendDetails.email}</Text>
+      <Pressable onPress={navigateToProfile}>
+        <Text>{friendDetails.email}</Text>
+      </Pressable>
       <Pressable onPress={handlePress}>
         {isFriend ? <Text>Remove Friend</Text> : <Text>Add Friend</Text>}
       </Pressable>
