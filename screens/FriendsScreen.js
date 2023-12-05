@@ -6,6 +6,7 @@ import FriendButton from "../components/FriendsList/FriendButton";
 const DATA = [
   {
     name: "Friend 3",
+    friendId: "Z9uvAlqCr0tW12ZRLHpQ",
     isFriend: true,
   },
   {

@@ -26,10 +26,12 @@ const LoginScreen = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(async () => {
         try {
+          const userId = userCredential.user.uid;
           const response = await axios.post(
             "http://localhost:3001/user/users",
             {
               email: email,
+              userId: userId,
             }
           );
           navigation.navigate("Main");
