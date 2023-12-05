@@ -126,10 +126,13 @@ const styles = StyleSheet.create({
 	},
 	bottomContainer: {
 		flexDirection: "row",
-		paddingTop: 10,
+		paddingTop: 0,
 	},
 	bottomContainer: {
 		flexDirection: "row",
 		paddingTop: 10,
+	},
+	bottomText: {
+		color: "white",
 	},
 });

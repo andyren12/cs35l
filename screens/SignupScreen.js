@@ -28,7 +28,7 @@ const SignupScreen = () => {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then(async () => {
 				try {
-					await axios.post("http://localhost:3001/user/users", {
+					await axios.post("http://localhost:3001/user/create", {
 						email: email,
 					});
 					navigation.navigate("Main");
@@ -141,8 +141,5 @@ const styles = StyleSheet.create({
 	bottomContainer: {
 		flexDirection: "row",
 		paddingTop: 10,
-	},
-	bottomText: {
-		color: "white",
 	},
 });

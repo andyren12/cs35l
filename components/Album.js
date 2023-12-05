@@ -2,7 +2,7 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import RatingDropdown from "./RatingDropdown";
 
-const Album = ({ name, image, artist }) => {
+const Album = ({ id, name, image, artist }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.albumInfo}>
@@ -12,7 +12,7 @@ const Album = ({ name, image, artist }) => {
 					<Text style={styles.artist}>{artist}</Text>
 				</View>
 			</View>
-			<RatingDropdown />
+			<RatingDropdown albumId={id} />
 		</View>
 	);
 };

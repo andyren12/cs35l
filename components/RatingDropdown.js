@@ -1,22 +1,56 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { getAuth } from "firebase/auth";
+import axios from "axios";
 import Icon from "react-native-vector-icons/Ionicons";
 import RatingStar from "./RatingStar";
 
-const RatingDropdown = () => {
+const RatingDropdown = ({ albumId }) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [rating, setRating] = useState(0);
+	const [rating, setRating] = useState();
+	const [email, setEmail] = useState();
+	const isInitialRender = useRef(true);
+
+	useEffect(() => {
+		const auth = getAuth();
+		setEmail(auth.currentUser.email);
+	}, []);
+
+	useEffect(() => {
+		if (isInitialRender.current) {
+			isInitialRender.current = false;
+		} else {
+			handleRating();
+		}
+	}, [rating]);
+
+	const handleRating = async () => {
+		try {
+			await axios.post("http://localhost:3001/music/add/album", {
+				albumId: albumId,
+			});
+			await axios.post("http://localhost:3001/music/change/rating", {
+				albumId: albumId,
+				rating: rating,
+				email: email,
+			});
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
 
 	const handleOpen = () => {
 		setIsOpen(!isOpen);
 	};
-	const handleRating = (index) => {
+
+	const changeRating = (index) => {
 		if (index == rating) {
 			setRating(0);
 		} else {
 			setRating(index);
 		}
 	};
+
 	return (
 		<View style={styles.container}>
 			{isOpen && (
@@ -25,7 +59,7 @@ const RatingDropdown = () => {
 						<RatingStar
 							key={index}
 							filled={index <= rating}
-							onPress={() => handleRating(index)}
+							onPress={() => changeRating(index)}
 						/>
 					))}
 				</View>
