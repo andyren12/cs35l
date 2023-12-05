@@ -18,7 +18,7 @@ const FriendButton = ({ friend }) => {
       : "http://localhost:3001/user/addFriend";
 
     try {
-      console.log(userId);
+      console.log(friend.friendId);
       const response = axios.post(apiEndpoint, {
         userId: userId,
         friendId: friend.friendId,
@@ -33,7 +33,7 @@ const FriendButton = ({ friend }) => {
     <View style={styles.container}>
       <Text>{friend.name}</Text>
       <Pressable onPress={handlePress}>
-        {friend.isFriend ? <Text>Add Friend</Text> : <Text>Remove Friend</Text>}
+        {friend.isFriend ? <Text>Remove Friend</Text> : <Text>Add Friend</Text>}
       </Pressable>
     </View>
   );

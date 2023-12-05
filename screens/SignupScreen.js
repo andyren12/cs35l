@@ -12,6 +12,7 @@ import {
   Text,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import axios from "axios";
 
 const SignupScreen = () => {
   const [email, setEmail] = useState("");
@@ -24,16 +25,26 @@ const SignupScreen = () => {
   };
 
   const handleSignup = () => {
-    try {
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(async () => {
-          setDoc(doc(db, "users", `${email}`), {});
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        try {
+          const userId = userCredential.user.uid;
+          const response = await axios.post(
+            "http://localhost:3001/user/users",
+            {
+              email: email,
+              userId: userId,
+            }
+          );
           navigation.navigate("Main");
-        })
-        .catch((error) => alert(error.message));
-    } catch (error) {
-      console.error(error);
-    }
+        } catch (error) {
+          alert("Failed to create user in Firestore: " + error.message);
+          console.error(error);
+        }
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
   return (

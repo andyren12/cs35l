@@ -6,12 +6,12 @@ import FriendButton from "../components/FriendsList/FriendButton";
 const DATA = [
   {
     name: "Friend 3",
-    friendId: "Z9uvAlqCr0tW12ZRLHpQ",
-    isFriend: true,
+    friendId: "StFg8Dlh2AMCCoubgWzat3M48oq2",
+    isFriend: false,
   },
   {
     name: "Friend 2",
-    isFriend: false,
+    isFriend: true,
   },
 ];
 
