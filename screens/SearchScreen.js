@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import {
-  ScrollView,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
   View,
@@ -10,32 +11,40 @@ import {
 import axios from "axios";
 import Album from "../components/Album";
 import Icon from "react-native-vector-icons/FontAwesome";
+import FriendButton from "../components/FriendsList/FriendButton";
 import AlbumDetailsScreen from "./AlbumDetailsScreen";
 
 const SearchScreen = () => {
-  const [input, setInput] = useState();
-  const [albums, setAlbums] = useState([]);
+  const [input, setInput] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchMode, setSearchMode] = useState("albums");
+
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      if (input) {
+        handleSubmit();
+      } else {
+        setSearchResults([]);
+      }
+    }, 500);
+
+    return () => clearTimeout(delayDebounce);
+  }, [input]);
   const [selected, setSelected] = useState(null);
 
   const handleSubmit = async () => {
-    const res = await axios.get("http://localhost:3001/search", {
-      params: { query: input },
-    });
-    setAlbums(res.data.albums.items);
+    if (searchMode === "albums") {
+      const res = await axios.get("http://localhost:3001/search", {
+        params: { query: input },
+      });
+      setSearchResults(res.data.albums.items);
+    } else {
+      const response = await axios.get(
+        `http://localhost:3001/user/searchUsers?query=${input}`
+      );
+      setSearchResults(response.data);
+    }
   };
-
-  if (selected) {
-    return (
-      <AlbumDetailsScreen
-        id={selected.id}
-        name={selected.name}
-        image={selected.images[0].url}
-        artist={selected.artists[0].name}
-        year={selected.release_date.substring(0, 4)}
-        onBack={() => setSelected(null)}
-      />
-    );
-  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -48,28 +57,48 @@ const SearchScreen = () => {
           onPress={handleSubmit}
         />
         <TextInput
-          placeholder="search"
+          placeholder={`Search ${searchMode}`}
           onChangeText={(text) => setInput(text)}
           value={input}
           onSubmitEditing={handleSubmit}
+          style={styles.input}
         />
       </View>
+
+      <View style={styles.switchButtonContainer}>
+        <TouchableOpacity
+          onPress={() => {
+            setSearchMode(searchMode === "albums" ? "friends" : "albums");
+            setSearchResults([]), setInput("");
+          }}
+          style={styles.switchButton}
+        >
+          <Text>
+            {searchMode === "albums" ? "Switch to Friends" : "Switch to Albums"}
+          </Text>
+        </TouchableOpacity>
+      </View>
+
       <ScrollView>
-        {albums.map((album, index) => (
-          <TouchableOpacity
-            style={styles.album}
-            key={index}
-            onPress={() => setSelected(album)}
-          >
-            <Album
-              id={album.id}
-              name={album.name}
-              image={album.images[0].url}
-              artist={album.artists[0].name}
-              year={album.release_date.substring(0, 4)}
-            />
-          </TouchableOpacity>
-        ))}
+        {searchResults.map((item, index) =>
+          searchMode === "albums" ? (
+            <TouchableOpacity
+              style={styles.album}
+              key={index}
+              onPress={() => setSelected(item)}
+            >
+              <Album
+                id={item.id}
+                name={item.name}
+                image={item.images[0].url}
+                artist={item.artists[0].name}
+                year={item.release_date.substring(0, 4)}
+              />
+            </TouchableOpacity>
+          ) : (
+            <FriendButton key={index} friend={item} />
+          )
+        )}
       </ScrollView>
     </SafeAreaView>
   );

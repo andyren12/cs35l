@@ -14,6 +14,9 @@ import FriendsScreen from "./screens/FriendsScreen";
 import AlbumDetailsScreen from "./screens/AlbumDetailsScreen.js";
 import HomeScreen from "./screens/HomeScreen.js";
 import LoginScreen from "./screens/LoginScreen.js";
+import UserProfileScreen from "./screens/UserProfileScreen.js";
+import FollowingPage from "./screens/FollowingPage.js";
+import FollowersPage from "./screens/FollowersPage.js";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,12 +40,7 @@ function Main() {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
-        options={{ headerShown: false }}
-      />
-      <Tab.Screen
-        name="Friends"
-        component={FriendsScreen}
+        component={UserProfileScreen}
         options={{ headerShown: false }}
       />
     </Tab.Navigator>
@@ -52,6 +50,30 @@ function Main() {
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  return (
+    <UserProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Signup"
+            component={SignupScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Main"
+            component={Main}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="YourAlbums"
+            component={YourAlbumsScreen}
+            options={{ headerShown: false }}
+          />
   return (
     <UserProvider>
       <NavigationContainer>
@@ -88,9 +110,19 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="AlbumDetails"
-            component={AlbumDetailsScreen}
-            options={{ headerShown: false }}
+            name="FollowersPage"
+            component={FollowersPage}
+            options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="FollowingPage"
+            component={FollowingPage}
+            options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="UserProfileScreen"
+            component={UserProfileScreen}
+            options={{ headerShown: true }}
           />
         </Stack.Navigator>
       </NavigationContainer>

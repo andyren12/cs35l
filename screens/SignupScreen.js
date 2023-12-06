@@ -28,7 +28,7 @@ const SignupScreen = () => {
       .then(async (userCredential) => {
         try {
           const userId = userCredential.user.uid;
-          await axios.post("http://localhost:3001/user/create", {
+          await axios.post("http://localhost:3001/user/createUser", {
             email: email,
             userId: userId,
           });
