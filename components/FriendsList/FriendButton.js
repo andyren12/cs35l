@@ -15,6 +15,7 @@ const FriendButton = ({ friend }) => {
 
   useEffect(() => {
     const fetchUserDetails = async () => {
+      console.log(friend);
       if (friend) {
         try {
           const response = await axios.get(
