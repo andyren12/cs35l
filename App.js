@@ -96,6 +96,11 @@ export default function App() {
             component={FollowingPage}
             options={{ headerShown: true }}
           />
+          <Stack.Screen
+            name="UserProfileScreen"
+            component={UserProfileScreen}
+            options={{ headerShown: true }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </UserProvider>

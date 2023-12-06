@@ -7,6 +7,7 @@ const {
 	updateDoc,
 	arrayRemove,
 	arrayUnion,
+	FieldValue,
 } = require("firebase/firestore");
 
 const db = getFirestore(app);
@@ -62,6 +63,7 @@ const changeRating = async (req, res) => {
 				["albumList.3"]: arrayRemove(albumId),
 				["albumList.4"]: arrayRemove(albumId),
 				["albumList.5"]: arrayRemove(albumId),
+				[`albumRatings.${albumId}`]: rating,
 			};
 			updateUserData[`albumList.${ratingArray}`] = arrayUnion(albumId);
 			await updateDoc(userDocRef, updateUserData);
@@ -79,6 +81,7 @@ const changeRating = async (req, res) => {
 				["albumList.3"]: arrayRemove(albumId),
 				["albumList.4"]: arrayRemove(albumId),
 				["albumList.5"]: arrayRemove(albumId),
+				[`albumRatings.${albumId}`]: null,
 			});
 		}
 		res.status(200).json({

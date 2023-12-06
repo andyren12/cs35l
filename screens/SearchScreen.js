@@ -65,9 +65,10 @@ const SearchScreen = () => {
 
       <View style={styles.switchButtonContainer}>
         <TouchableOpacity
-          onPress={() =>
-            setSearchMode(searchMode === "albums" ? "friends" : "albums")
-          }
+          onPress={() => {
+            setSearchMode(searchMode === "albums" ? "friends" : "albums");
+            setSearchResults([]), setInput("");
+          }}
           style={styles.switchButton}
         >
           <Text>
@@ -78,12 +79,14 @@ const SearchScreen = () => {
 
       <ScrollView>
         {searchResults.map((item, index) =>
-          searchMode === "songs" ? (
+          searchMode === "albums" ? (
             <Album
-              key={index}
+              key={item.id}
+              albumId={item.id}
               name={item.name}
               image={item.images[0].url}
               artist={item.artists[0].name}
+              year={item.release_date.substring(0, 4)}
             />
           ) : (
             <FriendButton key={index} friend={item} />
