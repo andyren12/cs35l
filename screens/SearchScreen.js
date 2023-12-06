@@ -78,7 +78,7 @@ const SearchScreen = () => {
 
       <ScrollView>
         {searchResults.map((item, index) =>
-          searchMode === "songs" ? (
+          searchMode === "albums" ? (
             <Album
               key={index}
               name={item.name}

@@ -10,6 +10,8 @@ const FollowingPage = () => {
   const currentUser = useCurrentUser();
   const userId = currentUser ? currentUser.uid : "No user";
 
+  console.log(userId);
+
   useEffect(() => {
     const fetchFriends = async () => {
       try {
