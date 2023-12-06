@@ -18,6 +18,7 @@ const SearchScreen = () => {
   const [input, setInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [searchMode, setSearchMode] = useState("albums");
+  const [selected, setSelected] = useState(null);
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
@@ -30,7 +31,6 @@ const SearchScreen = () => {
 
     return () => clearTimeout(delayDebounce);
   }, [input]);
-  const [selected, setSelected] = useState(null);
 
   const handleSubmit = async () => {
     if (searchMode === "albums") {
@@ -45,6 +45,19 @@ const SearchScreen = () => {
       setSearchResults(response.data);
     }
   };
+
+  if (selected) {
+    return (
+      <AlbumDetailsScreen
+        id={selected.id}
+        name={selected.name}
+        image={selected.images[0].url}
+        artist={selected.artists[0].name}
+        year={selected.release_date.substring(0, 4)}
+        onBack={() => setSelected(null)}
+      />
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -84,11 +97,11 @@ const SearchScreen = () => {
           searchMode === "albums" ? (
             <TouchableOpacity
               style={styles.album}
-              key={index}
+              key={item.id}
               onPress={() => setSelected(item)}
             >
               <Album
-                id={item.id}
+                albumId={item.id}
                 name={item.name}
                 image={item.images[0].url}
                 artist={item.artists[0].name}

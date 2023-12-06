@@ -1,7 +1,6 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 import React, { useEffect } from "react";
 import RatingDropdown from "./RatingDropdown";
-import { useNavigation } from "@react-navigation/native";
 import { useCurrentUser } from "../UserContext";
 import { getAuth } from "firebase/auth";
 import { useState } from "react";
@@ -13,7 +12,6 @@ const Album = ({ albumId, name, image, artist, year }) => {
   const [email, setEmail] = useState();
   const currentUser = useCurrentUser();
   const userId = currentUser ? currentUser.uid : "No user";
-  const navigation = useNavigation();
 
   useEffect(() => {
     const auth = getAuth();
@@ -71,22 +69,12 @@ const Album = ({ albumId, name, image, artist, year }) => {
     }
   };
 
-  const toAlbum = () => {
-    navigation.navigate("AlbumDetails", {
-      albumId,
-      name,
-      image,
-      artist,
-      year,
-    });
-  };
-
   return (
-    <TouchableOpacity style={styles.container} onPress={toAlbum}>
+    <View style={styles.container}>
       <View style={styles.albumInfo}>
         <Image style={styles.albumImage} source={{ uri: image }} />
         <View style={styles.text}>
-          <Text>{name}</Text>
+          <Text style={styles.name}>{name}</Text>
           <Text style={styles.artist}>{artist}</Text>
         </View>
       </View>
@@ -97,7 +85,7 @@ const Album = ({ albumId, name, image, artist, year }) => {
         changeRating={changeRating}
         handleOpen={handleOpen}
       />
-    </TouchableOpacity>
+    </View>
   );
 };
 

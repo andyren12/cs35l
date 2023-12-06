@@ -74,31 +74,6 @@ export default function App() {
             component={YourAlbumsScreen}
             options={{ headerShown: false }}
           />
-  return (
-    <UserProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Signup"
-            component={SignupScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Main"
-            component={Main}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="YourAlbums"
-            component={YourAlbumsScreen}
-            options={{ headerShown: false }}
-          />
-
           <Stack.Screen
             name="WantToListen"
             component={WantToListen}

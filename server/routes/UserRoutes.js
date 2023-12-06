@@ -9,8 +9,8 @@ const {
   getUser,
   checkFriend,
   getFollowers,
+  getAlbumRating,
 } = require("../controllers/UserController.js");
-UserController = require("../controllers/UserController.js");
 
 router.post("/createUser", createUser);
 router.post("/addFriend", addFriend);
@@ -20,6 +20,6 @@ router.get("/following", getFollowing);
 router.get("/followers", getFollowers);
 router.get("/searchUsers", searchUsers);
 router.get("/checkFriend", checkFriend);
-router.get("/getAlbumRating", UserController.getAlbumRating);
+router.get("/getAlbumRating", getAlbumRating);
 
 module.exports = router;
