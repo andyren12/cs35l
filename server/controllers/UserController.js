@@ -4,6 +4,7 @@ const {
 	doc,
 	updateDoc,
 	setDoc,
+	getDoc,
 	arrayUnion,
 	arrayRemove,
 } = require("firebase/firestore");
@@ -25,6 +26,7 @@ const createUser = async (req, res) => {
 		await setDoc(userRef, {
 			email: email,
 			albumList: albumList,
+			albumRatings: {},
 		});
 
 		res.status(201).json({
@@ -68,8 +70,30 @@ const removeFriend = async (req, res) => {
 	}
 };
 
+const getAlbumRating = async (req, res) => {
+	try {
+		const { albumId, userId } = req.query;
+		const userRef = doc(db, "users", userId);
+		const userSnap = await getDoc(userRef);
+		if (userSnap.exists()) {
+			const albumRatings = userSnap.data().albumRatings;
+			const rating = albumRatings[albumId];
+			res.json(rating);
+		} else {
+			res.json("User has not rated this album");
+		}
+	} catch (error) {
+		console.error("Error retrieving album rating: ", error);
+		res.status(500).json({
+			message: "Error retrieving album rating",
+			error: error.message,
+		});
+	}
+};
+
 module.exports = {
 	createUser,
 	addFriend,
 	removeFriend,
+	getAlbumRating,
 };

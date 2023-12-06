@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
 	ScrollView,
 	SafeAreaView,
@@ -39,10 +39,10 @@ const SearchScreen = () => {
 				/>
 			</View>
 			<ScrollView>
-				{albums.map((album, index) => (
+				{albums.map((album) => (
 					<Album
-						key={index}
-						id={album.id}
+						key={album.id}
+						albumId={album.id}
 						name={album.name}
 						image={album.images[0].url}
 						artist={album.artists[0].name}
