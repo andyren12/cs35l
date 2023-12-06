@@ -59,19 +59,21 @@ const AlbumDetailsScreen = ({ id, name, image, artist, year, onBack }) => {
     const res = await axios.get("http://localhost:3001/music/getAlbumRatings", {
       params: { id },
     });
-    setRatings(res.data);
-    setRating(
-      (res.data["1"].length +
-        2 * res.data["2"].length +
-        3 * res.data["3"].length +
-        4 * res.data["4"].length +
-        5 * res.data["5"].length) /
+    if (res.data) {
+      setRatings(res.data);
+      setRating(
         (res.data["1"].length +
-          res.data["2"].length +
-          res.data["3"].length +
-          res.data["4"].length +
-          res.data["5"].length)
-    );
+          2 * res.data["2"].length +
+          3 * res.data["3"].length +
+          4 * res.data["4"].length +
+          5 * res.data["5"].length) /
+          (res.data["1"].length +
+            res.data["2"].length +
+            res.data["3"].length +
+            res.data["4"].length +
+            res.data["5"].length)
+      );
+    }
   };
 
   useEffect(() => {

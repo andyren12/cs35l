@@ -1,63 +1,72 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import WantToListenPage from "./WantToListen";
 
 const ProfileScreen = () => {
-const navigation = useNavigation();
-const toYourAlbums = () => {
-  navigation.navigate("YourAlbums");
-}
+  const navigation = useNavigation();
+  const toYourAlbums = () => {
+    navigation.navigate("YourAlbums");
+  };
 
-const ToWantToListenPage = () => {
-  navigation.navigate("WantToListen");
-}
-const ToYourLists = () => {
-  navigation.navigate("YourLists");
-}
+  const ToWantToListenPage = () => {
+    navigation.navigate("WantToListen");
+  };
+  const ToYourLists = () => {
+    navigation.navigate("YourLists");
+  };
   return (
-    <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
+    <ScrollView
+      style={styles.scrollView}
+      contentContainerStyle={styles.container}
+    >
       <View style={styles.div}>
-      <View style={styles.container}>
-        <View style={styles.div}>
-          <View style={styles.ellipse} />
-          <View style={styles.overlap}>
-            <View style={styles.overlapGroup}>
-            <Text style={styles.textWrapper}>username</Text>
-              <Text style={styles.textWrapper2}>00 followers</Text>
-              <Text style={styles.textWrapper3}>00 following</Text>
-              <TouchableOpacity style={styles.editProfileButton}>
+        <View style={styles.container}>
+          <View style={styles.div}>
+            <View style={styles.ellipse} />
+            <View style={styles.overlap}>
+              <View style={styles.overlapGroup}>
+                <Text style={styles.textWrapper}>username</Text>
+                <Text style={styles.textWrapper2}>00 followers</Text>
+                <Text style={styles.textWrapper3}>00 following</Text>
+                <TouchableOpacity style={styles.editProfileButton}>
+                  <View style={styles.overlap2}>
+                    <View style={styles.rectangle} />
+                    <Text style={styles.textWrapper4}>SIGN OUT</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity style={styles.overlapWrapper}>
                 <View style={styles.overlap2}>
                   <View style={styles.rectangle} />
-                  <Text style={styles.textWrapper4}>SIGN OUT</Text>
+                  <Text style={styles.textWrapper4}>EDIT PROFILE</Text>
                 </View>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.overlapWrapper}>
-              <View style={styles.overlap2}>
-                <View style={styles.rectangle} />
-                <Text style={styles.textWrapper4}>EDIT PROFILE</Text>
+            <View style={styles.yourFavoriteAlbums}>
+              <View style={styles.overlapGroup2}>
+                <View style={styles.rectangle2} />
+                <View style={styles.rectangle3} />
+                <View style={styles.rectangle4} />
+                <View style={styles.rectangle5} />
+                <View style={styles.rectangle6} />
+                <Text style={styles.textWrapper5}>Your Favorite Albums</Text>
               </View>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.yourFavoriteAlbums}>
-            <View style={styles.overlapGroup2}>
-              <View style={styles.rectangle2} />
-              <View style={styles.rectangle3} />
-              <View style={styles.rectangle4} />
-              <View style={styles.rectangle5} />
-              <View style={styles.rectangle6} />
-              <Text style={styles.textWrapper5}>Your Favorite Albums</Text>
             </View>
-          </View>
-          <View style={styles.yourAlbumsOfThe}>
-            <View style={styles.overlap3}>
-              <View style={styles.group}>
-                <View style={styles.rectangle7} />
-                <View style={styles.rectangle8} />
-                <View style={styles.rectangle9} />
-                <View style={styles.rectangle10} />
-                <View style={styles.rectangle11} />
+            <View style={styles.yourAlbumsOfThe}>
+              <View style={styles.overlap3}>
+                <View style={styles.group}>
+                  <View style={styles.rectangle7} />
+                  <View style={styles.rectangle8} />
+                  <View style={styles.rectangle9} />
+                  <View style={styles.rectangle10} />
+                  <View style={styles.rectangle11} />
                 </View>
                 <Text style={styles.textWrapper5}>Recent Reviews</Text>
               </View>
@@ -75,28 +84,28 @@ const ToYourLists = () => {
                   <Text style={styles.textWrapper5}>Top Artists</Text>
                   <Text style={styles.textWrapper5}>Top Artists</Text>
                 </View>
-            <Text style={styles.textWrapper6}>Travis Scott</Text>
-              <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
-              <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
-            <Text style={styles.textWrapper6}>Travis Scott</Text>
-              <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
-              <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
-            <Text style={styles.textWrapper6}>Travis Scott</Text>
-              <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
-              <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
-            <Text style={styles.textWrapper6}>Travis Scott</Text>
-              <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
-              <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
-            <Text style={styles.textWrapper6}>Travis Scott</Text>
-              <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
-              <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
-            <Text style={styles.textWrapper6}>Travis Scott</Text>
-              <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
-              <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
-            <Text style={styles.textWrapper6}>Travis Scott</Text>
-              <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
-              <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
-            </View>
+                <Text style={styles.textWrapper6}>Travis Scott</Text>
+                <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
+                <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
+                <Text style={styles.textWrapper6}>Travis Scott</Text>
+                <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
+                <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
+                <Text style={styles.textWrapper6}>Travis Scott</Text>
+                <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
+                <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
+                <Text style={styles.textWrapper6}>Travis Scott</Text>
+                <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
+                <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
+                <Text style={styles.textWrapper6}>Travis Scott</Text>
+                <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
+                <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
+                <Text style={styles.textWrapper6}>Travis Scott</Text>
+                <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
+                <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
+                <Text style={styles.textWrapper6}>Travis Scott</Text>
+                <Text style={styles.albumsReviewed}>Albums Reviewed: 0</Text>
+                <Text style={styles.albumsReviewed}>Average Rating: 0.0</Text>
+              </View>
             </View>
             <View style={styles.overlap6}>
               <Text style={styles.textWrapper11}>Your Reviews</Text>
@@ -124,13 +133,11 @@ const ToYourLists = () => {
       </View>
     </ScrollView>
   );
-
 };
 
 export default ProfileScreen;
 
 const styles = StyleSheet.create({
-
   scrollView: {
     flex: 1,
   },
@@ -173,7 +180,6 @@ const styles = StyleSheet.create({
   },
   textWrapper: {
     color: "#000000",
-    fontFamily: "Inter-Bold",
     fontSize: 12,
     fontWeight: "700",
     left: 0,
@@ -185,7 +191,6 @@ const styles = StyleSheet.create({
   },
   textWrapper2: {
     color: "#000000",
-    fontFamily: "Inter-Light",
     fontSize: 10,
     fontWeight: "300",
     left: 0,
@@ -197,7 +202,6 @@ const styles = StyleSheet.create({
   },
   textWrapper3: {
     color: "#000000",
-    fontFamily: "Inter-Light",
     fontSize: 10,
     fontWeight: "300",
     left: 68,
@@ -230,7 +234,6 @@ const styles = StyleSheet.create({
   },
   textWrapper4: {
     color: "#504d4d",
-    fontFamily: "Inter-Medium",
     fontSize: 5,
     fontWeight: "500",
     height: 12,
@@ -247,9 +250,9 @@ const styles = StyleSheet.create({
     height: 48,
     width: 48,
     borderRadius: 24,
-    backgroundColor: '#CCCCCC',
+    backgroundColor: "#CCCCCC",
   },
-  
+
   overlapWrapper: {
     all: "unset",
     boxSizing: "border-box",
@@ -267,516 +270,496 @@ const styles = StyleSheet.create({
     width: 359,
   },
 
-overlapGroup2: {
-  height: 81,
-  position: "relative",
-  width: 357,
-},
+  overlapGroup2: {
+    height: 81,
+    position: "relative",
+    width: 357,
+  },
 
-rectangle2: {
-  backgroundColor: "#d9d9d9",
-  height: 60,
-  left: 198,
-  position: "absolute",
-  top: 21,
-  width: 60,
-},
+  rectangle2: {
+    backgroundColor: "#d9d9d9",
+    height: 60,
+    left: 198,
+    position: "absolute",
+    top: 21,
+    width: 60,
+  },
 
-rectangle3: {
-  backgroundColor: "#d9d9d9",
-  height: 60,
-  left: 264,
-  position: "absolute",
-  top: 21,
-  width: 60,
-},
+  rectangle3: {
+    backgroundColor: "#d9d9d9",
+    height: 60,
+    left: 264,
+    position: "absolute",
+    top: 21,
+    width: 60,
+  },
 
-rectangle4: {
-  backgroundColor: "#d9d9d9",
-  height: 60,
-  left: 66,
-  position: "absolute",
-  top: 21,
-  width: 60,
-},
+  rectangle4: {
+    backgroundColor: "#d9d9d9",
+    height: 60,
+    left: 66,
+    position: "absolute",
+    top: 21,
+    width: 60,
+  },
 
-rectangle5: {
-  backgroundColor: "#d9d9d9",
-  height: 60,
-  left: 0,
-  position: "absolute",
-  top: 21,
-  width: 60,
-},
+  rectangle5: {
+    backgroundColor: "#d9d9d9",
+    height: 60,
+    left: 0,
+    position: "absolute",
+    top: 21,
+    width: 60,
+  },
 
-rectangle6: {
-  backgroundColor: "#d9d9d9",
-  height: 60,
-  left: 132,
-  position: "absolute",
-  top: 21,
-  width: 60,
-},
+  rectangle6: {
+    backgroundColor: "#d9d9d9",
+    height: 60,
+    left: 132,
+    position: "absolute",
+    top: 21,
+    width: 60,
+  },
 
-textWrapper5: {
-  color: "#000000",
-  fontFamily: "Inter-Bold",
-  fontSize: 12,
-  fontWeight: 700,
-  left: 0,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  top: 0,
-  width: 357,
-},
+  textWrapper5: {
+    color: "#000000",
+    fontSize: 12,
+    fontWeight: 700,
+    left: 0,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    top: 0,
+    width: 357,
+  },
 
-yourAlbumsOfThe: {
-  height: 82,
-  left: 23,
-  position: "absolute",
-  top: 230,
-  width: 359,
-},
+  yourAlbumsOfThe: {
+    height: 82,
+    left: 23,
+    position: "absolute",
+    top: 230,
+    width: 359,
+  },
 
-overlap3: {
-  height: 82,
-  position: "relative",
-  width: 357,
-},
+  overlap3: {
+    height: 82,
+    position: "relative",
+    width: 357,
+  },
 
-group: {
-  height: 60,
-  left: 0,
-  position: "absolute",
-  top: 22,
-  width: 324,
-},
+  group: {
+    height: 60,
+    left: 0,
+    position: "absolute",
+    top: 22,
+    width: 324,
+  },
 
-rectangle7: {
-  backgroundColor: "#d9d9d9",
-  height: 60,
-  left: 264,
-  position: "absolute",
-  top: 0,
-  width: 60,
-},
+  rectangle7: {
+    backgroundColor: "#d9d9d9",
+    height: 60,
+    left: 264,
+    position: "absolute",
+    top: 0,
+    width: 60,
+  },
 
-rectangle8: {
-  backgroundColor: "#d9d9d9",
-  height: 60,
-  left: 198,
-  position: "absolute",
-  top: 0,
-  width: 60,
-},
+  rectangle8: {
+    backgroundColor: "#d9d9d9",
+    height: 60,
+    left: 198,
+    position: "absolute",
+    top: 0,
+    width: 60,
+  },
 
-rectangle9: {
-  backgroundColor: "#d9d9d9",
-  height: 60,
-  left: 66,
-  position: "absolute",
-  top: 0,
-  width: 60,
-},
+  rectangle9: {
+    backgroundColor: "#d9d9d9",
+    height: 60,
+    left: 66,
+    position: "absolute",
+    top: 0,
+    width: 60,
+  },
 
-rectangle10: {
-  backgroundColor: "#d9d9d9",
-  height: 60,
-  left: 0,
-  position: "absolute",
-  top: 0,
-  width: 60,
-},
+  rectangle10: {
+    backgroundColor: "#d9d9d9",
+    height: 60,
+    left: 0,
+    position: "absolute",
+    top: 0,
+    width: 60,
+  },
 
-rectangle11: {
-  backgroundColor: "#d9d9d9",
-  height: 60,
-  left: 132,
-  position: "absolute",
-  top: 0,
-  width: 60,
-},
+  rectangle11: {
+    backgroundColor: "#d9d9d9",
+    height: 60,
+    left: 132,
+    position: "absolute",
+    top: 0,
+    width: 60,
+  },
 
-overlapGroupWrapper: {
-  height: 82,
-  left: 23,
-  position: "absolute",
-  top: 332,
-  width: 359,
-},
+  overlapGroupWrapper: {
+    height: 82,
+    left: 23,
+    position: "absolute",
+    top: 332,
+    width: 359,
+  },
 
-overlap4: {
-  height: 347,
-  left: 119,
-  position: "absolute",
-  top: 523,
-  width: 361,
-},
+  overlap4: {
+    height: 347,
+    left: 119,
+    position: "absolute",
+    top: 523,
+    width: 361,
+  },
 
-divWrapper: {
-  height: 347,
-  left: 0,
-  position: "absolute",
-  top: 0,
-  width: 361,
-},
+  divWrapper: {
+    height: 347,
+    left: 0,
+    position: "absolute",
+    top: 0,
+    width: 361,
+  },
 
-overlap5: {
-  height: 347,
-  position: "relative",
-  width: 357,
-},
+  overlap5: {
+    height: 347,
+    position: "relative",
+    width: 357,
+  },
 
-frame: {
-  alignItems: "flex-start",
-  display: "inline-flex",
-  flexDirection: "column",
-  gap: 6,
-  left: 0,
-  position: "absolute",
-  top: 23,
-},
+  frame: {
+    alignItems: "flex-start",
+    display: "inline-flex",
+    flexDirection: "column",
+    gap: 6,
+    left: 0,
+    position: "absolute",
+    top: 23,
+  },
 
-rectangle12: {
-  backgroundColor: "#d9d9d9",
-  height: 60,
-  position: "relative",
-  width: 60,
-},
+  rectangle12: {
+    backgroundColor: "#d9d9d9",
+    height: 60,
+    position: "relative",
+    width: 60,
+  },
 
-textWrapper6: {
-  color: "#000000",
-  fontFamily: "Inter-Bold",
-  fontSize: 10,
-  fontWeight: "700",
-  left: 73,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  top: 35,
-  width: 77,
-},
+  textWrapper6: {
+    color: "#000000",
+    fontSize: 10,
+    fontWeight: "700",
+    left: 73,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    top: 35,
+    width: 77,
+  },
 
-albumsReviewed: {
-  color: "#000000",
-  fontFamily: "Inter-Regular",
-  fontSize: 7,
-  fontWeight: "400",
-  left: 74,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  top: 49,
-  width: 127,
-},
+  albumsReviewed: {
+    color: "#000000",
+    fontSize: 7,
+    fontWeight: "400",
+    left: 74,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    top: 49,
+    width: 127,
+  },
 
-textWrapper7: {
-  color: "#000000",
-  fontFamily: "Inter-Bold",
-  fontSize: 10,
-  fontWeight: "700",
-  left: 73,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  top: 100,
-  width: 77,
-},
+  textWrapper7: {
+    color: "#000000",
+    fontSize: 10,
+    fontWeight: "700",
+    left: 73,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    top: 100,
+    width: 77,
+  },
 
-p: {
-  color: "#000000",
-  fontFamily: "Inter-Regular",
-  fontSize: 7,
-  fontWeight: "400",
-  left: 74,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  top: 114,
-  width: 127,
-},
+  p: {
+    color: "#000000",
+    fontSize: 7,
+    fontWeight: "400",
+    left: 74,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    top: 114,
+    width: 127,
+  },
 
-textWrapper8: {
-  color: "#000000",
-  fontFamily: "Inter-Bold",
-  fontSize: 10,
-  fontWeight: "700",
-  left: 73,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  top: 166,
-  width: 77,
-},
+  textWrapper8: {
+    color: "#000000",
+    fontSize: 10,
+    fontWeight: "700",
+    left: 73,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    top: 166,
+    width: 77,
+  },
 
-albumsReviewed2: {
-  color: "#000000",
-  fontFamily: "Inter-Regular",
-  fontSize: 7,
-  fontWeight: "400",
-  left: 74,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  top: 180,
-  width: 127,
-},
+  albumsReviewed2: {
+    color: "#000000",
+    fontSize: 7,
+    fontWeight: "400",
+    left: 74,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    top: 180,
+    width: 127,
+  },
 
-textWrapper9: {
-  color: "#000000",
-  fontFamily: "Inter-Bold",
-  fontSize: 10,
-  fontWeight: "700",
-  left: 73,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  top: 232,
-  width: 77,
-},
+  textWrapper9: {
+    color: "#000000",
+    fontSize: 10,
+    fontWeight: "700",
+    left: 73,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    top: 232,
+    width: 77,
+  },
 
-albumsReviewed3: {
-  color: "#000000",
-  fontFamily: "Inter-Regular",
-  fontSize: 7,
-  fontWeight: "400",
-  left: 74,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  top: 246,
-  width: 127,
-},
+  albumsReviewed3: {
+    color: "#000000",
+    fontSize: 7,
+    fontWeight: "400",
+    left: 74,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    top: 246,
+    width: 127,
+  },
 
-textWrapper10: {
-  color: "#000000",
-  fontFamily: "Inter-Bold",
-  fontSize: 10,
-  fontWeight: "700",
-  left: 74,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  top: 297,
-  width: 77,
-},
+  textWrapper10: {
+    color: "#000000",
+    fontSize: 10,
+    fontWeight: "700",
+    left: 74,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    top: 297,
+    width: 77,
+  },
 
-albumsReviewed4: {
-  color: "#000000",
-  fontFamily: "Inter-Regular",
-  fontSize: 7,
-  fontWeight: "400",
-  left: 75,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  top: 311,
-  width: 127,
-},
+  albumsReviewed4: {
+    color: "#000000",
+    fontSize: 7,
+    fontWeight: "400",
+    left: 75,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    top: 311,
+    width: 127,
+  },
 
-overlap6: {
-  height: 117,
-  left: -21,
-  position: "absolute",
-  top: 524,
-  width: 114,
-},
+  overlap6: {
+    height: 117,
+    left: -21,
+    position: "absolute",
+    top: 524,
+    width: 114,
+  },
 
-textWrapper11: {
-  color: "#000000",
-  fontFamily: "Inter-Medium",
-  fontSize: 10,
-  fontWeight: "500",
-  left: 37,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  textAlign: "right",
-  top: 19,
-  width: 77,
-},
+  textWrapper11: {
+    color: "#000000",
+    fontSize: 10,
+    fontWeight: "500",
+    left: 37,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    textAlign: "right",
+    top: 19,
+    width: 77,
+  },
 
-textWrapper12: {
-  color: "#000000",
-  fontFamily: "Inter-Medium",
-  fontSize: 10,
-  fontWeight: "500",
-  left: 37,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  textAlign: "right",
-  top: 83,
-  width: 77,
-},
+  textWrapper12: {
+    color: "#000000",
+    fontSize: 10,
+    fontWeight: "500",
+    left: 37,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    textAlign: "right",
+    top: 83,
+    width: 77,
+  },
 
-textWrapper13: {
-  color: "#000000",
-  fontFamily: "Inter-Medium",
-  fontSize: 10,
-  fontWeight: "500",
-  left: 37,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  textAlign: "right",
-  top: 0,
-  width: 77,
-},
+  textWrapper13: {
+    color: "#000000",
+    fontSize: 10,
+    fontWeight: "500",
+    left: 37,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    textAlign: "right",
+    top: 0,
+    width: 77,
+  },
 
-textWrapper14: {
-  color: "#000000",
-  fontFamily: "Inter-Medium",
-  fontSize: 10,
-  fontWeight: "500",
-  left: 34,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  textAlign: "right",
-  top: 40,
-  width: 80,
-},
+  textWrapper14: {
+    color: "#000000",
+    fontSize: 10,
+    fontWeight: "500",
+    left: 34,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    textAlign: "right",
+    top: 40,
+    width: 80,
+  },
 
-textWrapper15: {
-  color: "#000000",
-  fontFamily: "Inter-Medium",
-  fontSize: 10,
-  fontWeight: "500",
-  left: 0,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  textAlign: "right",
-  top: 61,
-  width: 114,
-},
-overlap7: {
-  height: 84,
-  left: -41,
-  position: "absolute",
-  top: 433,
-  width: 388,
-},
+  textWrapper15: {
+    color: "#000000",
+    fontSize: 10,
+    fontWeight: "500",
+    left: 0,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    textAlign: "right",
+    top: 61,
+    width: 114,
+  },
+  overlap7: {
+    height: 84,
+    left: -41,
+    position: "absolute",
+    top: 433,
+    width: 388,
+  },
 
-textWrapper16: {
-  color: "#000000",
-  fontFamily: "Inter-Medium",
-  fontSize: 10,
-  fontWeight: "500",
-  left: 0,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  textAlign: "right",
-  top: 49,
-  width: 77,
-},
+  textWrapper16: {
+    color: "#000000",
+    fontSize: 10,
+    fontWeight: "500",
+    left: 0,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    textAlign: "right",
+    top: 49,
+    width: 77,
+  },
 
-overlap8: {
-  height: 84,
-  left: 64,
-  position: "absolute",
-  top: 0,
-  width: 324,
-},
+  overlap8: {
+    height: 84,
+    left: 64,
+    position: "absolute",
+    top: 0,
+    width: 324,
+  },
 
-textWrapper17: {
-  color: "#000000",
-  fontFamily: "Inter-Medium",
-  fontSize: 10,
-  fontWeight: "500",
-  left: 247,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  textAlign: "right",
-  top: 50,
-  width: 77,
-},
+  textWrapper17: {
+    color: "#000000",
+    fontSize: 10,
+    fontWeight: "500",
+    left: 247,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    textAlign: "right",
+    top: 50,
+    width: 77,
+  },
 
-img: {
-  height: 48,
-  left: 21,
-  position: "absolute",
-  top: 11,
-  width: 283,
-},
+  img: {
+    height: 48,
+    left: 21,
+    position: "absolute",
+    top: 11,
+    width: 283,
+  },
 
-textWrapper18: {
-  color: "#504d4d",
-  fontFamily: "Inter-SemiBold",
-  fontSize: 8,
-  fontWeight: "600",
-  height: 12,
-  left: 0,
-  letterSpacing: 0,
-  lineHeight: "normal",
-  position: "absolute",
-  top: 0,
-  width: 54,
-},
+  textWrapper18: {
+    color: "#504d4d",
+    fontSize: 8,
+    fontWeight: "600",
+    height: 12,
+    left: 0,
+    letterSpacing: 0,
+    lineHeight: "normal",
+    position: "absolute",
+    top: 0,
+    width: 54,
+  },
 
-rectangle13: {
-  height: 77,
-  left: -5,
-  position: "fixed",
-  top: 605,
-  width: 394,
-},
+  rectangle13: {
+    height: 77,
+    left: -5,
+    position: "fixed",
+    top: 605,
+    width: 394,
+  },
 
-group2: {
-  height: 43,
-  left: 33,
-  position: "fixed",
-  top: 615,
-  width: 319,
-},
+  group2: {
+    height: 43,
+    left: 33,
+    position: "fixed",
+    top: 615,
+    width: 319,
+  },
 
-rectangle14: {
-  backgroundColor: "#d9d9d9",
-  height: 43,
-  left: 136,
-  position: "absolute",
-  top: 0,
-  width: 43,
-},
+  rectangle14: {
+    backgroundColor: "#d9d9d9",
+    height: 43,
+    left: 136,
+    position: "absolute",
+    top: 0,
+    width: 43,
+  },
 
-rectangle15: {
-  backgroundColor: "#d9d9d9",
-  height: 43,
-  left: 69,
-  position: "absolute",
-  top: 0,
-  width: 43,
-},
+  rectangle15: {
+    backgroundColor: "#d9d9d9",
+    height: 43,
+    left: 69,
+    position: "absolute",
+    top: 0,
+    width: 43,
+  },
 
-rectangle16: {
-  backgroundColor: "#d9d9d9",
-  height: 43,
-  left: 276,
-  position: "absolute",
-  top: 0,
-  width: 43,
-},
+  rectangle16: {
+    backgroundColor: "#d9d9d9",
+    height: 43,
+    left: 276,
+    position: "absolute",
+    top: 0,
+    width: 43,
+  },
 
-rectangle17: {
-  backgroundColor: "#d9d9d9",
-  height: 43,
-  left: 0,
-  position: "absolute",
-  top: 0,
-  width: 43,
-},
+  rectangle17: {
+    backgroundColor: "#d9d9d9",
+    height: 43,
+    left: 0,
+    position: "absolute",
+    top: 0,
+    width: 43,
+  },
 
-rectangle18: {
-  backgroundColor: "#d9d9d9",
-  height: 43,
-  left: 206,
-  position: "absolute",
-  top: 0,
-  width: 43,
-},
-
+  rectangle18: {
+    backgroundColor: "#d9d9d9",
+    height: 43,
+    left: 206,
+    position: "absolute",
+    top: 0,
+    width: 43,
+  },
 });

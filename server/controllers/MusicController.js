@@ -100,7 +100,7 @@ const getAlbumRatings = async (req, res) => {
     if (docSnap.exists()) {
       res.json(docSnap.data());
     } else {
-      res.json("No such document!");
+      res.json(null);
     }
   } catch (error) {
     console.error("Error fetching document: ", error);
