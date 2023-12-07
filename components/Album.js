@@ -74,8 +74,12 @@ const Album = ({ albumId, name, image, artist }) => {
 			<View style={styles.albumInfo}>
 				<Image style={styles.albumImage} source={{ uri: image }} />
 				<View style={styles.text}>
-					<Text style={styles.name}>{name}</Text>
-					<Text style={styles.artist}>{artist}</Text>
+					<Text numberOfLines={1} style={styles.name}>
+						{name}
+					</Text>
+					<Text numberOfLines={1} style={styles.artist}>
+						{artist}
+					</Text>
 				</View>
 			</View>
 			<RatingDropdown
@@ -110,9 +114,11 @@ const styles = StyleSheet.create({
 	},
 	name: {
 		color: "white",
+		width: 150,
 	},
 	artist: {
 		color: "gray",
+		width: 150,
 		fontSize: 12,
 	},
 });
