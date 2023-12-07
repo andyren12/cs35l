@@ -6,7 +6,7 @@ import { getAuth } from "firebase/auth";
 import { useState } from "react";
 import axios from "axios";
 
-const Album = ({ albumId, name, image, artist, year }) => {
+const Album = ({ albumId, name, image, artist }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [rating, setRating] = useState(null);
   const [email, setEmail] = useState();
