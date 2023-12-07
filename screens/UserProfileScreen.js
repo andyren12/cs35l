@@ -99,7 +99,7 @@ const UserProfileScreen = ({ route }) => {
 			let tempAlbums = [];
 			for (let i = 0; i < topAlbumIds.length; i++) {
 				const res = await axios.get(
-					`http://localhost:3001/getAlbum?albumId=${topAlbumIds[i]}`
+					`http://localhost:3001/music/getAlbum?albumId=${topAlbumIds[i]}`
 				);
 				tempAlbums.push(res.data);
 			}
