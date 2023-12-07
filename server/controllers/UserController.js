@@ -219,7 +219,7 @@ const getAlbums = async (req, res) => {
 		if (!userSnap.exists()) {
 			return res.status(404).send("User not found");
 		}
-		const albumList = userSnap.data().albumList || [];
+		const albumList = userSnap.data().albumList || {};
 		res.status(200).json(albumList);
 	} catch (error) {
 		console.error("Error retrieving albums", error);
