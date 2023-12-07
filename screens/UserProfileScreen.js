@@ -9,6 +9,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { useCurrentUser } from "../UserContext";
 import AlbumPreview from "../components/AlbumPreview";
+import MyBarChart from "../components/MyBarChart";
 import axios from "axios";
 import AlbumDetailsScreen from "./AlbumDetailsScreen";
 
@@ -19,6 +20,7 @@ const UserProfileScreen = ({ route }) => {
 	const [followingCount, setFollowingCount] = useState(0);
 	const [topAlbumIds, setTopAlbumIds] = useState([]);
 	const [topAlbums, setTopAlbums] = useState([]);
+	const [albums, setAlbums] = useState();
 	const [selectedAlbum, setSelectedAlbum] = useState(null);
 	const currentUser = useCurrentUser();
 	const userId = route.params ? route.params.userId : currentUser.uid;
@@ -77,7 +79,7 @@ const UserProfileScreen = ({ route }) => {
 					`http://localhost:3001/user/getAlbums?userId=${userId}`
 				);
 				const albumList = res.data;
-				console.log(res.data);
+				setAlbums(albumList);
 				let tempAlbumIds = [];
 				for (let i = 5; i > 0; i--) {
 					if (albumList[i]) {
@@ -87,7 +89,7 @@ const UserProfileScreen = ({ route }) => {
 						}
 					}
 				}
-				setTopAlbumIds(tempAlbumIds.slice(0, 4));
+				setTopAlbumIds(tempAlbumIds.slice(0, 8));
 			} catch (error) {
 				console.error("Error fetching user albums: ", error);
 			}
@@ -144,7 +146,7 @@ const UserProfileScreen = ({ route }) => {
 							</Text>
 						</TouchableOpacity>
 					</View>
-					<View style={styles.topAlbumsContainer}>
+					<View style={{ margin: 10, marginTop: 20, padding: 5 }}>
 						<Text style={{ color: "white", marginBottom: 5 }}>
 							Your Top Albums
 						</Text>
@@ -161,6 +163,12 @@ const UserProfileScreen = ({ route }) => {
 								</TouchableOpacity>
 							))}
 						</View>
+					</View>
+					<View style={{ margin: 15, marginTop: 30, padding: 5 }}>
+						<Text style={{ color: "white", marginBottom: 5 }}>
+							Your Album Rating Statistics:
+						</Text>
+						<MyBarChart ratings={albums} />
 					</View>
 				</View>
 			) : (
@@ -195,12 +203,9 @@ const styles = StyleSheet.create({
 		color: "white",
 		textAlign: "center",
 	},
-	topAlbumsContainer: {
-		margin: 15,
-		padding: 5,
-	},
 	topAlbums: {
 		flexDirection: "row",
+		flexWrap: "wrap",
 	},
 });
 
