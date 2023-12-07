@@ -10,8 +10,6 @@ const {
 	arrayUnion,
 } = require("firebase/firestore");
 
-const SpotifyWebApi = require("spotify-web-api-node");
-
 const db = getFirestore(app);
 
 const spotifyApi = new SpotifyWebApi({
