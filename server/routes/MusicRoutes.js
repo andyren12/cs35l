@@ -8,5 +8,8 @@ router.post("/changeRating", MusicController.changeRating);
 router.get("/search", MusicController.search);
 router.get("/getAlbum", MusicController.getAlbum);
 router.get("/getAlbumRatings", MusicController.getAlbumRatings);
+router.get("/search", MusicController.search);
+router.get("/getNewReleases", MusicController.getNewReleases);
+router.get("/getRecommendations", MusicController.getRecommendations);
 
 module.exports = router;

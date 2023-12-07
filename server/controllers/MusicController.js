@@ -1,3 +1,4 @@
+const SpotifyWebApi = require("spotify-web-api-node");
 const { app } = require("../../firebase.js");
 const {
 	getFirestore,
@@ -32,26 +33,6 @@ const authenticateSpotify = async () => {
 };
 
 authenticateSpotify();
-
-const search = async (req, res) => {
-	try {
-		const { query } = req.query;
-		const result = await spotifyApi.searchAlbums(query);
-		res.json(result.body);
-	} catch (err) {
-		console.log(err);
-	}
-};
-
-const getAlbum = async (req, res) => {
-	try {
-		const { albumId } = req.query;
-		const result = await spotifyApi.getAlbum(albumId);
-		res.json(result.body);
-	} catch (err) {
-		console.log(err);
-	}
-};
 
 const addAlbum = async (req, res) => {
 	try {
@@ -151,10 +132,80 @@ const getAlbumRatings = async (req, res) => {
 	}
 };
 
+const search = async (req, res) => {
+	try {
+		const { query } = req.query;
+		const result = await spotifyApi.searchAlbums(query);
+		res.json(result.body);
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+const getAlbum = async (req, res) => {
+	try {
+		const { albumId } = req.query;
+		const result = await spotifyApi.getAlbum(albumId);
+		res.json(result.body);
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+const getNewReleases = async (req, res) => {
+	try {
+		const result = await spotifyApi.getNewReleases({ limit: 5, offset: 0 });
+		res.json(result.body);
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+const getRecommendations = async (req, res) => {
+	const { userId } = req.query;
+	const userDoc = doc(db, "users", userId);
+	try {
+		const docSnap = await getDoc(userDoc);
+		let albumId;
+		let artistId;
+		if (docSnap.exists()) {
+			if (docSnap.data().albumList["5"]?.length > 0) {
+				albumId = docSnap.data().albumList["5"][0];
+			} else if (docSnap.data().albumList["4"]?.length > 0) {
+				albumId = docSnap.data().albumList["4"][0];
+			} else if (docSnap.data().albumList["3"]?.length > 0) {
+				albumId = docSnap.data().albumList["3"][0];
+			} else {
+				albumId = "2ODvWsOgouMbaA5xf0RkJe";
+			}
+		}
+
+		const album = await spotifyApi.getAlbum(albumId);
+		artistId = album.body.artists[0].id;
+
+		const recommendations = await spotifyApi.getRecommendations({
+			limit: 5,
+			min_energy: 0.4,
+			seed_artists: [artistId],
+			min_popularity: 50,
+		});
+
+		const albumRecs = recommendations.body.tracks.map(
+			(object) => object.album
+		);
+		res.json(albumRecs);
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 module.exports = {
 	search,
 	getAlbum,
 	addAlbum,
 	changeRating,
 	getAlbumRatings,
+	search,
+	getNewReleases,
+	getRecommendations,
 };
