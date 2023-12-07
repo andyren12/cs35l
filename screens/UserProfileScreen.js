@@ -201,8 +201,6 @@ const styles = StyleSheet.create({
 	},
 	topAlbums: {
 		flexDirection: "row",
-		// borderColor: "white",
-		// borderWidth: 1,
 	},
 });
 
