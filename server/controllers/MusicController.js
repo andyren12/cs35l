@@ -1,3 +1,4 @@
+const SpotifyWebApi = require("spotify-web-api-node");
 const { app } = require("../../firebase.js");
 const {
   getFirestore,
@@ -11,6 +12,21 @@ const {
 } = require("firebase/firestore");
 
 const db = getFirestore(app);
+const spotifyApi = new SpotifyWebApi({
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+});
+
+const authenticateSpotify = async () => {
+  try {
+    const data = await spotifyApi.clientCredentialsGrant();
+    spotifyApi.setAccessToken(data.body["access_token"]);
+  } catch (err) {
+    console.error("Something went wrong when retrieving an access token", err);
+  }
+};
+
+authenticateSpotify();
 
 const addAlbum = async (req, res) => {
   try {
@@ -110,8 +126,29 @@ const getAlbumRatings = async (req, res) => {
   }
 };
 
+const search = async (req, res) => {
+  try {
+    const { query } = req.query;
+    const result = await spotifyApi.searchAlbums(query);
+    res.json(result.body);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getNewReleases = async (req, res) => {
+  try {
+    const result = await spotifyApi.getNewReleases({ limit: 5, offset: 0 });
+    res.json(result.body);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   addAlbum,
   changeRating,
   getAlbumRatings,
+  search,
+  getNewReleases,
 };

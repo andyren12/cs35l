@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { BarChart } from "react-native-chart-kit";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useCurrentUser } from "../UserContext";
 
 const MyBarChart = ({ ratings }) => {
   const data = {
@@ -54,6 +55,9 @@ const MyBarChart = ({ ratings }) => {
 const AlbumDetailsScreen = ({ id, name, image, artist, year, onBack }) => {
   const [ratings, setRatings] = useState(null);
   const [rating, setRating] = useState(0.0);
+  const [yourRating, setYourRating] = useState(0);
+  const currentUser = useCurrentUser();
+  const userId = currentUser ? currentUser.uid : "No user";
 
   const getAlbumRatings = async () => {
     const res = await axios.get("http://localhost:3001/music/getAlbumRatings", {
@@ -78,8 +82,22 @@ const AlbumDetailsScreen = ({ id, name, image, artist, year, onBack }) => {
     }
   };
 
+  const fetchExistingRating = async () => {
+    try {
+      const res = await axios.get("http://localhost:3001/user/getAlbumRating", {
+        params: { albumId: id, userId },
+      });
+      if (res.data) {
+        setYourRating(res.data);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   useEffect(() => {
     getAlbumRatings();
+    fetchExistingRating();
   }, [id]);
 
   return (
@@ -98,10 +116,10 @@ const AlbumDetailsScreen = ({ id, name, image, artist, year, onBack }) => {
         </View>
       </View>
       <View style={styles.rating}>
-        <Text>YOUR RATING: </Text>
+        <Text style={{ fontSize: 14 }}>YOUR RATING: {yourRating}</Text>
       </View>
       <View style={styles.overallRating}>
-        <Text>{rating}</Text>
+        <Text style={{ fontSize: 18 }}>{rating}</Text>
       </View>
       <MyBarChart style={styles.chart} ratings={ratings} />
     </SafeAreaView>
