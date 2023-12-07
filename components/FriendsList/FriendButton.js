@@ -83,10 +83,14 @@ const FriendButton = ({ friend }) => {
   return (
     <View style={styles.container}>
       <Pressable onPress={navigateToProfile}>
-        <Text>{friendDetails.email}</Text>
+        <Text style={styles.text}>{friendDetails.email}</Text>
       </Pressable>
       <Pressable onPress={handlePress}>
-        {isFriend ? <Text>Remove Friend</Text> : <Text>Add Friend</Text>}
+        {isFriend ? (
+          <Text style={styles.text}>Remove Friend</Text>
+        ) : (
+          <Text style={styles.text}>Add Friend</Text>
+        )}
       </Pressable>
     </View>
   );
@@ -98,6 +102,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 8,
+  },
+  text: {
+    color: "white",
   },
 });
 

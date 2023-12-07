@@ -2,19 +2,18 @@ import { app } from "./firebase.js";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import ProfileScreen from "./screens/ProfileScreen";
+import SearchScreen from "./screens/SearchScreen";
 import { UserProvider } from "./UserContext.js";
-import WriteReviewActually, {
-  WriteReview,
-} from "./screens/WriteReviewActually";
+import SignupScreen from "./screens/SignupScreen";
+import WriteReviewActually from "./screens/WriteReviewActually";
 import WantToListen from "./screens/WantToListen";
 import YourAlbumsScreen from "./screens/YourAlbumsScreen";
 import YourListsPage from "./screens/YourListsPage";
-import ProfileScreen from "./screens/ProfileScreen";
-import SearchScreen from "./screens/SearchScreen";
-import FriendsScreen from "./screens/FriendsScreen.js";
-import LoginScreen from "./screens/LoginScreen";
-import HomeScreen from "./screens/HomeScreen";
-import SignupScreen from "./screens/SignupScreen";
+import FriendsScreen from "./screens/FriendsScreen";
+import AlbumDetailsScreen from "./screens/AlbumDetailsScreen.js";
+import HomeScreen from "./screens/HomeScreen.js";
+import LoginScreen from "./screens/LoginScreen.js";
 import UserProfileScreen from "./screens/UserProfileScreen.js";
 import FollowingPage from "./screens/FollowingPage.js";
 import FollowersPage from "./screens/FollowersPage.js";
@@ -75,7 +74,6 @@ export default function App() {
             component={YourAlbumsScreen}
             options={{ headerShown: false }}
           />
-
           <Stack.Screen
             name="WantToListen"
             component={WantToListen}
