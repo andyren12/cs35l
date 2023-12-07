@@ -1,118 +1,87 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
-	View,
-	Text,
-	ScrollView,
-	FlatList,
-	StyleSheet,
-	SafeAreaView,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
 } from "react-native";
-
-const SquareDisplay = ({ index, text }) => (
-	<View style={styles.squareDisplay}>
-		<View style={styles.squarePlaceholder} />
-	</View>
-);
-
-const Section = ({ title }) => <Text style={styles.sectionTitle}>{title}</Text>;
+import axios from "axios";
+import AlbumDetailsScreen from "./AlbumDetailsScreen";
 
 const HomeScreen = () => {
-	const renderSquareDisplay = ({ item, index }) => (
-		<SquareDisplay index={index} text={item.category} />
-	);
-	const categories = [
-		{
-			category: "Popular this Month",
-			data: Array(5).fill({ category: "Popular this Month" }),
-		},
-		{
-			category: "New Releases",
-			data: Array(5).fill({ category: "New Releases" }),
-		},
-		{
-			category: "Popular with Friends",
-			data: Array(10).fill({ category: "Popular with Friends" }),
-		},
-		{
-			category: "New from Friends",
-			data: Array(10).fill({ category: "New from Friends" }),
-		},
-	];
+  const [newReleases, setNewReleases] = useState([]);
+  const [selected, setSelected] = useState(null);
 
-	return (
-		<SafeAreaView style={styles.homePage}>
-			<Text style={styles.notedTitle}>noted.</Text>
-			<View style={styles.line} />
+  const getNewReleases = async () => {
+    const res = await axios.get("http://localhost:3001/music/getNewReleases");
+    setNewReleases(res.data.albums.items);
+  };
 
-			<ScrollView style={styles.div}>
-				{categories.map((category) => (
-					<View key={category.category}>
-						<Section title={category.category} />
-						<FlatList
-							horizontal
-							data={category.data}
-							renderItem={renderSquareDisplay}
-							keyExtractor={(item, index) =>
-								`${category.category}-${index}`
-							}
-						/>
-					</View>
-				))}
-			</ScrollView>
-		</SafeAreaView>
-	);
+  useEffect(() => {
+    getNewReleases();
+  }, []);
+
+  if (selected) {
+    return (
+      <AlbumDetailsScreen
+        id={selected.id}
+        name={selected.name}
+        image={selected.images[0].url}
+        artist={selected.artists[0].name}
+        year={selected.release_date.substring(0, 4)}
+        onBack={() => setSelected(null)}
+      />
+    );
+  }
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>noted.</Text>
+      <View style={styles.display}>
+        <Text style={styles.header}>New Releases</Text>
+        <ScrollView horizontal={true}>
+          {newReleases?.map((album, index) => (
+            <TouchableOpacity
+              key={index}
+              style={{ marginRight: 20 }}
+              onPress={() => setSelected(album)}
+            >
+              <Image
+                style={{ height: 100, width: 100 }}
+                source={{ uri: album.images[0].url }}
+              />
+              <Text style={{ color: "white", width: 100 }}>{album.name}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </View>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
-	homePage: {
-		backgroundColor: "#141313",
-		flex: 1,
-		alignItems: "center",
-		justifyContent: "center",
-	},
-	div: {
-		backgroundColor: "#141313",
-		height: 667,
-		width: 375,
-	},
-	notedTitle: {
-		color: "#ffffff",
-		fontSize: 25,
-		fontWeight: "800",
-		marginTop: 20,
-		marginBottom: 10,
-		marginLeft: -290,
-	},
-	line: {
-		height: 1,
-		backgroundColor: "#ffffff",
-		width: "95%",
-		marginBottom: 20,
-	},
-
-	sectionTitle: {
-		color: "#ffffff",
-		fontSize: 13,
-		fontWeight: "700",
-		marginTop: 20,
-		marginBottom: 10,
-		marginLeft: 0,
-	},
-	squareDisplay: {
-		alignItems: "center",
-		marginRight: 10,
-	},
-	squarePlaceholder: {
-		width: 65,
-		height: 65,
-		backgroundColor: "#d9d9d9",
-		marginBottom: 5,
-	},
-	squareText: {
-		color: "#ffffff",
-		fontSize: 12,
-	},
-	// ... Add other necessary styles ...
+  container: {
+    backgroundColor: "black",
+    height: "100%",
+  },
+  display: {
+    marginHorizontal: 10,
+  },
+  title: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 30,
+    marginVertical: 20,
+    marginHorizontal: 10,
+  },
+  header: {
+    color: "white",
+    fontSize: 18,
+    marginBottom: 10,
+  },
 });
 
 export default HomeScreen;

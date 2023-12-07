@@ -136,9 +136,19 @@ const search = async (req, res) => {
   }
 };
 
+const getNewReleases = async (req, res) => {
+  try {
+    const result = await spotifyApi.getNewReleases({ limit: 5, offset: 0 });
+    res.json(result.body);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   addAlbum,
   changeRating,
   getAlbumRatings,
   search,
+  getNewReleases,
 };
