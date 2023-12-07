@@ -124,7 +124,7 @@ const UserProfileScreen = ({ route }) => {
 		<SafeAreaView style={styles.profileContainer}>
 			{userDetails ? (
 				<View>
-					<Text style={styles.headerText}>Your Profile</Text>
+					<Text style={styles.headerText}>Profile</Text>
 					<Text style={{ color: "white", textAlign: "center" }}>
 						{userDetails.email}
 					</Text>
