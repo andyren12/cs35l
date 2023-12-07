@@ -10,18 +10,42 @@ import {
 } from "react-native";
 import axios from "axios";
 import AlbumDetailsScreen from "./AlbumDetailsScreen";
+import { useCurrentUser } from "../UserContext";
 
 const HomeScreen = () => {
   const [newReleases, setNewReleases] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
   const [selected, setSelected] = useState(null);
 
+  const currentUser = useCurrentUser();
+  const userId = currentUser ? currentUser.uid : "No user";
+
   const getNewReleases = async () => {
-    const res = await axios.get("http://localhost:3001/music/getNewReleases");
-    setNewReleases(res.data.albums.items);
+    try {
+      const res = await axios.get("http://localhost:3001/music/getNewReleases");
+      setNewReleases(res.data.albums.items);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getRecommendations = async () => {
+    try {
+      const res = await axios.get(
+        "http://localhost:3001/music/getRecommendations",
+        {
+          params: { userId },
+        }
+      );
+      setRecommendations(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
     getNewReleases();
+    getRecommendations();
   }, []);
 
   if (selected) {
@@ -53,7 +77,27 @@ const HomeScreen = () => {
                 style={{ height: 100, width: 100 }}
                 source={{ uri: album.images[0].url }}
               />
-              <Text style={{ color: "white", width: 100 }}>{album.name}</Text>
+              <Text style={{ color: "white", width: 100 }} numberOfLines={2}>
+                {album.name}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+        <Text style={styles.header}>Recommendations</Text>
+        <ScrollView horizontal={true}>
+          {recommendations?.map((album, index) => (
+            <TouchableOpacity
+              key={index}
+              style={{ marginRight: 20 }}
+              onPress={() => setSelected(album)}
+            >
+              <Image
+                style={{ height: 100, width: 100 }}
+                source={{ uri: album.images[0].url }}
+              />
+              <Text style={{ color: "white", width: 100 }} numberOfLines={2}>
+                {album.name}
+              </Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -80,7 +124,7 @@ const styles = StyleSheet.create({
   header: {
     color: "white",
     fontSize: 18,
-    marginBottom: 10,
+    marginVertical: 10,
   },
 });
 

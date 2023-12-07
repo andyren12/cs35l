@@ -2,7 +2,6 @@ import { app } from "./firebase.js";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import ProfileScreen from "./screens/ProfileScreen";
 import SearchScreen from "./screens/SearchScreen";
 import { UserProvider } from "./UserContext.js";
 import SignupScreen from "./screens/SignupScreen";
@@ -10,38 +9,61 @@ import WriteReviewActually from "./screens/WriteReviewActually";
 import WantToListen from "./screens/WantToListen";
 import YourAlbumsScreen from "./screens/YourAlbumsScreen";
 import YourListsPage from "./screens/YourListsPage";
-import FriendsScreen from "./screens/FriendsScreen";
-import AlbumDetailsScreen from "./screens/AlbumDetailsScreen.js";
 import HomeScreen from "./screens/HomeScreen.js";
 import LoginScreen from "./screens/LoginScreen.js";
 import UserProfileScreen from "./screens/UserProfileScreen.js";
 import FollowingPage from "./screens/FollowingPage.js";
 import FollowersPage from "./screens/FollowersPage.js";
+import Icon from "react-native-vector-icons/FontAwesome.js";
 
 const Tab = createBottomTabNavigator();
 
 function Main() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: "#e91e63",
+        tabBarInactiveTintColor: "gray",
+        labelStyle: {
+          fontSize: 12,
+        },
+        tabBarStyle: {
+          backgroundColor: "black",
+          borderTopColor: "transparent",
+          height: 50,
+          justifyContent: "center",
+        },
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="home" color={color} size={size} />
+          ),
+        }}
       />
       <Tab.Screen
         name="Search"
         component={SearchScreen}
-        options={{ headerShown: false }}
-      />
-      <Tab.Screen
-        name="Write Review"
-        component={WriteReviewActually}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="search" color={color} size={size} />
+          ),
+        }}
       />
       <Tab.Screen
         name="Profile"
         component={UserProfileScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="user" color={color} size={size} />
+          ),
+        }}
       />
     </Tab.Navigator>
   );
