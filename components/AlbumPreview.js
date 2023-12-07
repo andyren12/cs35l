@@ -1,10 +1,11 @@
 import { Text, View, Image, StyleSheet } from "react-native";
 
 const AlbumPreview = ({ image, name }) => {
+	const adjustName = name.length > 7 ? name.slice(0, 7) + ".." : name;
 	return (
 		<View style={styles.container}>
 			<Image style={styles.albumImage} source={{ uri: image }} />
-			<Text style={styles.albumText}>{name}</Text>
+			<Text style={styles.albumText}>{adjustName}</Text>
 		</View>
 	);
 };
@@ -13,6 +14,8 @@ const styles = StyleSheet.create({
 	container: {
 		flexDirection: "column",
 		alignItems: "center",
+		padding: 5,
+		paddingBottom: 0,
 	},
 	albumImage: {
 		height: 80,
@@ -20,9 +23,9 @@ const styles = StyleSheet.create({
 	},
 	albumText: {
 		color: "white",
-		width: 100,
+		width: 60,
 		textAlign: "center",
-		padding: 10,
+		marginTop: "2%",
 	},
 });
 
