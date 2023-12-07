@@ -34,7 +34,7 @@ const SearchScreen = () => {
 
   const handleSubmit = async () => {
     if (searchMode === "albums") {
-      const res = await axios.get("http://localhost:3001/search", {
+      const res = await axios.get("http://localhost:3001/music/search", {
         params: { query: input },
       });
       setSearchResults(res.data.albums.items);
