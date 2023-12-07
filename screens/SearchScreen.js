@@ -86,7 +86,7 @@ const SearchScreen = () => {
           }}
           style={styles.switchButton}
         >
-          <Text>
+          <Text style={{ color: "white", alignSelf: "center" }}>
             {searchMode === "albums" ? "Switch to Friends" : "Switch to Albums"}
           </Text>
         </TouchableOpacity>
