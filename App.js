@@ -30,7 +30,7 @@ function Main() {
 				tabBarStyle: {
 					backgroundColor: "black",
 					borderTopColor: "transparent",
-					height: 50,
+					height: "10%",
 					justifyContent: "center",
 				},
 			}}
@@ -109,12 +109,12 @@ export default function App() {
 					<Stack.Screen
 						name="FollowersPage"
 						component={FollowersPage}
-						options={{ headerShown: true }}
+						options={{ headerShown: false }}
 					/>
 					<Stack.Screen
 						name="FollowingPage"
 						component={FollowingPage}
-						options={{ headerShown: true }}
+						options={{ headerShown: false }}
 					/>
 					<Stack.Screen
 						name="UserProfileScreen"
