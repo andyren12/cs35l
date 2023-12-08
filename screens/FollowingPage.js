@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, ScrollView, Text, StyleSheet, TouchableOpacity, View } from "react-native";
-import Icon from 'react-native-vector-icons/Ionicons'; 
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 
 import axios from "axios";
 import { useCurrentUser } from "../UserContext";
-import FriendButton from "../components/FriendsList/FriendButton";
+import FriendButton from "../components/FriendButton";
 
-const FollowingPage = ({ navigation }) => {
+const FollowingPage = ({ navigation, route }) => {
   const [followingList, setFollowingList] = useState([]);
-  const currentUser = useCurrentUser();
-  const userId = currentUser ? currentUser.uid : "No user";
-
-  console.log(userId);
+  const { userId } = route.params;
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -36,7 +40,7 @@ const FollowingPage = ({ navigation }) => {
             <Icon name="chevron-back" size={25} color="white" />
           </TouchableOpacity>
         </View>
-        <Text style={styles.headerTitle}>Following Page</Text>
+        <Text style={styles.headerTitle}>Following</Text>
         <View style={styles.headerRight} />
       </View>
       <ScrollView>
@@ -51,24 +55,24 @@ const FollowingPage = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black', 
+    backgroundColor: "black",
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between', 
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     padding: 5,
   },
   headerLeft: {
-    flex: 1, 
+    flex: 1,
   },
   headerTitle: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   headerRight: {
-    flex: 1, 
+    flex: 1,
   },
 });
 

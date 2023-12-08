@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Pressable, Text, View, StyleSheet } from "react-native";
-import { useCurrentUser } from "../../UserContext";
+import { useCurrentUser } from "../UserContext";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
@@ -15,7 +15,6 @@ const FriendButton = ({ friend }) => {
 
   useEffect(() => {
     const fetchUserDetails = async () => {
-      console.log(friend);
       if (friend) {
         try {
           const response = await axios.get(

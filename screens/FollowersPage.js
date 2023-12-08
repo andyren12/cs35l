@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, ScrollView, Text, StyleSheet, TouchableOpacity, View } from "react-native";
-import Icon from 'react-native-vector-icons/Ionicons';
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 
 import axios from "axios";
 import { useCurrentUser } from "../UserContext";
-import FriendButton from "../components/FriendsList/FriendButton";
+import FriendButton from "../components/FriendButton";
 
-const FollowersPage = ({ navigation }) => {
+const FollowersPage = ({ navigation, route }) => {
   const [followersList, setFollowersList] = useState([]);
-  const currentUser = useCurrentUser();
-  const userId = currentUser ? currentUser.uid : "No user";
+  const { userId } = route.params;
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -34,7 +40,7 @@ const FollowersPage = ({ navigation }) => {
             <Icon name="chevron-back" size={25} color="white" />
           </TouchableOpacity>
         </View>
-        <Text style={styles.headerTitle}>Followers Page</Text>
+        <Text style={styles.headerTitle}>Followers</Text>
         <View style={styles.headerRight} />
       </View>
       <ScrollView>
@@ -49,21 +55,21 @@ const FollowersPage = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black', 
+    backgroundColor: "black",
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between', // Distribute space evenly between elements
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between", // Distribute space evenly between elements
     padding: 5,
   },
   headerLeft: {
     flex: 1, // Make sure it takes up space so that the title remains centered
   },
   headerTitle: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   headerRight: {
     flex: 1, // Same as headerLeft to balance the layout

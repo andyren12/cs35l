@@ -11,7 +11,7 @@ import {
 import axios from "axios";
 import Album from "../components/Album";
 import Icon from "react-native-vector-icons/FontAwesome";
-import FriendButton from "../components/FriendsList/FriendButton";
+import FriendButton from "../components/FriendButton";
 import AlbumDetailsScreen from "./AlbumDetailsScreen";
 
 const SearchScreen = () => {

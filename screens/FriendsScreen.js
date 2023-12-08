@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import { FlashList } from "@shopify/flash-list";
-import FriendButton from "../components/FriendsList/FriendButton";
+import FriendButton from "../components/FriendButton";
 import Icon from "react-native-vector-icons/FontAwesome";
 import axios from "axios";
 
