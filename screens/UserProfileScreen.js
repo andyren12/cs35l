@@ -13,6 +13,8 @@ import AlbumPreview from "../components/AlbumPreview";
 import MyBarChart from "../components/MyBarChart";
 import axios from "axios";
 import AlbumDetailsScreen from "./AlbumDetailsScreen";
+import Icon from "react-native-vector-icons/Ionicons";
+
 
 const UserProfileScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -129,7 +131,23 @@ const UserProfileScreen = ({ route }) => {
     <SafeAreaView style={styles.profileContainer}>
       {userDetails ? (
         <ScrollView>
-          <Text style={styles.headerText}>profile.</Text>
+			{currentUser.uid === userId ? (
+				<View>
+					<Text style={styles.headerText}>profile.</Text>
+				</View>
+			) : (
+				<View style={styles.header}>
+        			<View style={{ flexDirection: "row"}}>
+          				<TouchableOpacity onPress={() => navigation.goBack()}>
+            			<Icon name="chevron-back" size={25} color="white" />
+          				</TouchableOpacity>
+						<View style={{ alignItems: "center", width: "88%" }}>
+						<Text style={styles.headerText}>profile.</Text>
+						</View>
+						  <View style={styles.headerRight} />
+       				</View>
+     	 		</View>
+			)}
           <Text style={{ color: "white", textAlign: "center" }}>
             {userDetails.email}
           </Text>
@@ -185,9 +203,9 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     borderColor: "black",
-    borderWidth: 1,
-    textAlign: "center",
+    borderWidth: 0,
     marginBottom: 10,
+	textAlign: "center"
   },
   followContainer: {
     marginTop: 10,
