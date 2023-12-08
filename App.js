@@ -119,7 +119,7 @@ export default function App() {
 					<Stack.Screen
 						name="UserProfileScreen"
 						component={UserProfileScreen}
-						options={{ headerShown: true }}
+						options={{ headerShown: false }}
 					/>
 				</Stack.Navigator>
 			</NavigationContainer>
