@@ -126,7 +126,7 @@ const UserProfileScreen = ({ route }) => {
 		<SafeAreaView style={styles.profileContainer}>
 			{userDetails ? (
 				<View>
-					<Text style={styles.headerText}>Profile</Text>
+					<Text style={styles.headerText}>profile.</Text>
 					<Text style={{ color: "white", textAlign: "center" }}>
 						{userDetails.email}
 					</Text>
@@ -188,7 +188,8 @@ const styles = StyleSheet.create({
 	},
 	headerText: {
 		color: "white",
-		fontSize: 24,
+		fontSize: 30,
+		fontWeight: "bold",
 		borderColor: "black",
 		borderWidth: 1,
 		textAlign: "center",
