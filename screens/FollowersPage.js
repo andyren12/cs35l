@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, ScrollView, Text } from "react-native";
+import { SafeAreaView, ScrollView, Text, StyleSheet, TouchableOpacity, View } from "react-native";
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import axios from "axios";
 import { useCurrentUser } from "../UserContext";
 import FriendButton from "../components/FriendsList/FriendButton";
 
-const FollowersPage = () => {
+const FollowersPage = ({navigation}) => {
   const [followersList, setFollowersList] = useState([]);
   const currentUser = useCurrentUser();
   const userId = currentUser ? currentUser.uid : "No user";
@@ -26,8 +27,12 @@ const FollowersPage = () => {
   }, []);
 
   return (
-    <SafeAreaView>
-      <Text>Followers Page</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon name="chevron-back" size={30} color="white" />
+        </TouchableOpacity>
+      </View>
       <ScrollView>
         {followersList.map((friend, index) => (
           <FriendButton key={index} friend={friend} />
@@ -36,5 +41,17 @@ const FollowersPage = () => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'black', 
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+  },
+});
 
 export default FollowersPage;
