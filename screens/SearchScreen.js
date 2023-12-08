@@ -75,6 +75,7 @@ const SearchScreen = () => {
           value={input}
           onSubmitEditing={handleSubmit}
           style={styles.input}
+          autoCapitalize="none"
         />
       </View>
 
