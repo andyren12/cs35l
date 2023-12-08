@@ -7,7 +7,7 @@ import {
   Text,
   ScrollView,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { useCurrentUser } from "../UserContext";
 import AlbumPreview from "../components/AlbumPreview";
 import MyBarChart from "../components/MyBarChart";
@@ -26,12 +26,14 @@ const UserProfileScreen = ({ route }) => {
   const currentUser = useCurrentUser();
   const userId = route.params ? route.params.userId : currentUser.uid;
 
-  useEffect(() => {
-    fetchUserDetails();
-    fetchUserFollowers();
-    fetchUserFollowing();
-    fetchUserAlbums();
-  }, [userId]);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchUserDetails();
+      fetchUserFollowers();
+      fetchUserFollowing();
+      fetchUserAlbums();
+    }, [userId])
+  );
 
   useEffect(() => {
     setTopAlbumArray();
@@ -143,7 +145,7 @@ const UserProfileScreen = ({ route }) => {
               <Text style={styles.followInfo}>following: {followingCount}</Text>
             </TouchableOpacity>
           </View>
-          <View style={{ margin: 10, marginTop: 20, padding: 5 }}>
+          <View style={{ margin: 15, marginTop: 20, padding: 5 }}>
             <Text style={{ color: "white", marginBottom: 5 }}>
               Your Top Albums
             </Text>
