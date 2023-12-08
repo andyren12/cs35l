@@ -14,6 +14,9 @@ import MyBarChart from "../components/MyBarChart";
 import axios from "axios";
 import AlbumDetailsScreen from "./AlbumDetailsScreen";
 import Icon from "react-native-vector-icons/Ionicons";
+import LoginScreen from "./LoginScreen";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase";
 
 
 const UserProfileScreen = ({ route }) => {
@@ -115,6 +118,19 @@ const UserProfileScreen = ({ route }) => {
       console.error("Error retrieving album information: ", error);
     }
   };
+
+  const handleSignout = () => {
+	signOut(auth);
+	navigation.navigate("Login");
+  }
+
+//   onAuthStateChanged(auth, (user) => {
+// 	if (user) {
+// 	} else {
+// 	  navigation.navigate("Login");
+// 	}
+//   });
+
   if (selectedAlbum) {
     return (
       <AlbumDetailsScreen
@@ -132,8 +148,13 @@ const UserProfileScreen = ({ route }) => {
       {userDetails ? (
         <ScrollView>
 			{currentUser.uid === userId ? (
-				<View>
-					<Text style={styles.headerText}>profile.</Text>
+				<View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+				<Text style={styles.headerText}>profile.</Text>
+					<View style={{position: "absolute", right: 10}}>
+						<TouchableOpacity onPress={handleSignout}>
+                  		<Icon name="ellipsis-horizontal" size={25} color="white" />
+                		</TouchableOpacity>
+					</View>
 				</View>
 			) : (
 				<View style={styles.header}>
