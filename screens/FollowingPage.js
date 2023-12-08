@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, ScrollView, Text, StyleSheet, TouchableOpacity, View } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'; 
 
 import axios from "axios";
@@ -31,9 +31,13 @@ const FollowingPage = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="chevron-back" size={30} color="white" />
-        </TouchableOpacity>
+        <View style={styles.headerLeft}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon name="chevron-back" size={25} color="white" />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.headerTitle}>Following Page</Text>
+        <View style={styles.headerRight} />
       </View>
       <ScrollView>
         {followingList.map((friend, index) => (
@@ -47,14 +51,25 @@ const FollowingPage = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'black', 
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
+    justifyContent: 'space-between', 
+    padding: 5,
   },
-  // Add other styles here as needed
+  headerLeft: {
+    flex: 1, 
+  },
+  headerTitle: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  headerRight: {
+    flex: 1, 
+  },
 });
 
 export default FollowingPage;
